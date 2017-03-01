@@ -100,13 +100,76 @@ function drawFractal(){
 
 
 
-function init(){
+function main(tframe){
+    // Add mouse events
+    canvas.addEventListener("mousedown", onMouseDown);
+        
+    // Request animation frames
+    window.requestAnimationFrame(main);
+    
     generatePalette();
 }
 
-function main(){
-    init();
+function init(){
+    main(0);
     drawFractal();
 }
 
-main();
+
+// Zoom the fractal
+    function zoomFractal(x, y, factor, zoomin) {
+        if (zoomin) {
+            // Zoom in
+            zoom *= factor;
+            panx = factor * (x + offsetx + panx);
+            pany = factor * (y + offsety + pany);
+        } else {
+            // Zoom out
+            zoom /= factor;
+            panx = (x + offsetx + panx) / factor;
+            pany = (y + offsety + pany) / factor;
+        }
+    }
+    
+    // Mouse event handlers
+    function onMouseDown(e) {
+        var pos = getMousePos(canvas, e);
+        
+        // Zoom out with Control
+        var zoomin = true;
+        if (e.ctrlKey) {
+            zoomin = false;
+        }
+        
+        // Pan with Shift
+        var zoomfactor = 2;
+        if (e.shiftKey) {
+            zoomfactor = 1;
+        }
+        
+        // Zoom the fractal at the mouse position
+        zoomFractal(pos.x, pos.y, zoomfactor, zoomin);
+        
+        // Generate a new image
+        drawFractal();
+}
+
+// Get the mouse position
+    function getMousePos(canvas, e) {
+        var rect = canvas.getBoundingClientRect();
+        return {
+            x: Math.round((e.clientX - rect.left)/(rect.right - rect.left)*canvas.width),
+            y: Math.round((e.clientY - rect.top)/(rect.bottom - rect.top)*canvas.height)
+        };
+    }
+
+
+
+
+
+
+
+
+
+
+init();
