@@ -1,46 +1,10 @@
-<!DOCTYPE HTML>
-<!-- TODO:
-    - fraktale w css
-    - http://andrew-hoyer.com/experiments/fractals/
-    - http://rosettacode.org/wiki/Fractal_tree#JavaScript
-    - https://github.com/rembound/Mandelbrot-Fractal-HTML5/blob/master/mandelbrot-fractal.js
-    - http://www.atopon.org/mandel/# (prostokątem sie zoomuje
-    - Request animation frames
-    window.requestAnimationFrame(main);
-    - maxiterations zmieniaz dokładnosc(?)
--->
-<head>
-	<meta http-equiv="content-type" content="text/html" />
-	<meta name="author" content="lolkittens" />
-    <meta charset="utf-8" />
-
-	<title>Untitled 1</title>
-<style>
-canvas {
-    border: 1px solid #000;    
-}
-
-#lol {   
-    width:30px;
-}
-</style>
-</head>
-
-<body>
-
-<canvas id="myCanvas" width="800" height="600"> </canvas>
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script>
-
-function setCanvasVariables(){
-    var canvas = $("#myCanvas")[0] //dostaje obiekt jquery a nie canvas jak jest bez [0]
-    var canvasContent = canvas.getContext("2d");
-    var canvasWidth = canvas.width;
-    var canvasHeight = canvas.height;
-    var canvasData = canvasContent.getImageData(0,0, canvasWidth, canvasHeight);
-}
+var canvas = $("#myCanvas")[0] //dostaje obiekt jquery a nie canvas jak jest bez [0]
+var canvasContent = canvas.getContext("2d");
+var canvasWidth = canvas.width;
+var canvasHeight = canvas.height;
+var canvasData = canvasContent.getImageData(0,0, canvasWidth, canvasHeight);
 
 var offsetx = -canvasWidth/2;
 var offsety = -canvasHeight/2;
@@ -149,6 +113,3 @@ canvasContent.moveTo(200,100);
 canvasContent.lineTo(300,100);
 canvasContent.stroke();
 */
-</script>
-</body>
-</html>
