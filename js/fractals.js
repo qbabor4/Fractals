@@ -16,6 +16,8 @@ var zoom = 150;
 
 // Palette array of 256 colors in object {r,g,b}
 var palette = [];
+
+var roffset, goffset, boffset;
     
 // define values od a pixel
 function drawPixel(x, y, r, g, b, a) {
@@ -67,9 +69,6 @@ function iterate(x, y, imageWidth, imageHeight, maxiterations) {
 
 // Calculate a gradient
 function generatePalette() {
-    var roffset = 24;
-    var goffset = 16;
-    var boffset = 0;
     
     for (var i=0; i<256; i++) {
         palette[i] = { r:roffset, g:goffset, b:boffset};    
@@ -104,9 +103,10 @@ function main(tframe){
     // Add mouse events
     canvas.addEventListener("mousedown", onMouseDown);
         
-    // Request animation frames
-    window.requestAnimationFrame(main);
-    
+    // Request animation frames // nie wiem po co i jak uzyc
+    //window.requestAnimationFrame(main);
+
+    changeColorsValue();
     generatePalette();
 }
 
@@ -164,7 +164,19 @@ function init(){
     }
 
 
+function changeColorsValue() {
+    roffset = parseInt(roffsetOutputValue.value);
+    goffset = parseInt(goffsetOutputValue.value);
+    boffset = parseInt(boffsetOutputValue.value);
+    console.log(roffset, goffset, boffset);
+}
 
+
+function drawNewColorFractal() {
+    changeColorsValue();
+    generatePalette();
+    drawFractal();
+}
 
 
 
