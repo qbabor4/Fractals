@@ -10,10 +10,11 @@
     - przepisac zoom fractal na jquery
     - kolo kolorów i tak generowac paletę // potem napisac zeby zmianiac liste w palette (przesunąć)
     - pokazac jaki kolor sie tworzy z przesuniec suwaków
+    - po odswierzeniu value na pasku jest inna niz wartosc na outpucie... //zmienic (1)
 -->
 <head>
 	<meta http-equiv="content-type" content="text/html" />
-	<meta name="author" content="lolkittens" />
+	<meta name="Jakub Borówka" content="Fractals" />
     <meta charset="utf-8" />
 
 	<title>Untitled 1</title>
@@ -25,6 +26,12 @@ canvas {
 #lol {   
     width:30px;
 }
+
+#colorPreview{
+    width:40px;
+    height:40px;
+    background: #181000;
+}
 </style>
 </head>
 
@@ -35,24 +42,31 @@ Zoom in by clicking on the image of fractal<br /><br /><br />
 
 RED 
 <br />
-0<input id="roffsetInputValue" type="range" max="255" min="0" value="24" oninput="roffsetOutputValue.value = roffsetInputValue.value"/> 255 Value: <output id="roffsetOutputValue">24</output></br>
+0<input id="roffsetInputValue" type="range" max="255" min="0" value="24" oninput="roffsetOutputValue.value = roffsetInputValue.value"/> 255 Value: 
+<output id="roffsetOutputValue">24</output><br />
 GREEN 
 <br /> 
-0<input id="goffsetInputValue" type="range" max="255" min="0" value="16" oninput="goffsetOutputValue.value = goffsetInputValue.value"/> 255 value: <output id="goffsetOutputValue">16</output> <br />
+0<input id="goffsetInputValue" type="range" max="255" min="0" value="16" oninput="goffsetOutputValue.value = goffsetInputValue.value"/> 255 value: 
+<output id="goffsetOutputValue">16</output> <br />
 BLUE 
 <br />
-0<input id="boffsetInputValue" type="range" max="255" min="0" value="0" oninput="boffsetOutputValue.value = boffsetInputValue.value"/> 255 value: <output id="boffsetOutputValue">0</output> <br />
-</br>
+0<input id="boffsetInputValue" type="range" max="255" min="0" value="0" oninput="boffsetOutputValue.value = boffsetInputValue.value"/> 255 value: 
+<output id="boffsetOutputValue">0</output> <br />
+<br />
 
-<input type="button" id="changeColorsvalue" value="Change colors" onclick="drawNewColorFractal()"/>
+Color prewiew: (Use darker colors for better effect)
+<div id="colorPreview"></div><br />
+
+<input type="button" id="changeColorsvalue" value="Change colors" onclick="drawNewColorFractal()"/> 
 <br /><br />
 <canvas id="myCanvas" width="800" height="600"> </canvas>
-</br>
+<br />
 
 
 <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
 <script src="js/jquery.js"></script>
 <script src="js/fractals.js"></script>
+<script src="js/elementsAction.js"></script>
 
 </body>
 </html>

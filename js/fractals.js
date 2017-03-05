@@ -89,9 +89,7 @@ function drawFractal(){
     // draw pixels
     for (var i = 0; i < canvasHeight + 1; i++) {
         for (var j = 0; j < canvasWidth + 1; j++){
-            //drawPixel(j, i, 20,200,10,255); 
             color = calculateColor(j, i, canvasWidth, canvasHeight, 250); //250
-            //console.log(color.r, color.g, color.b);
             drawPixel(j, i, color.r, color.g, color.b, 255); 
         } 
     }
@@ -127,7 +125,7 @@ function changeColorsValue() {
     roffset = parseInt(roffsetOutputValue.value);
     goffset = parseInt(goffsetOutputValue.value);
     boffset = parseInt(boffsetOutputValue.value);
-    console.log(roffset, goffset, boffset);
+    //console.log(roffset, goffset, boffset);
 }
 
 
@@ -176,7 +174,12 @@ function init(){
     drawFractal();
 }
 
-init();
+$(document).ready(function(){
+    
+    init();
+    
+});
+
 
 
 
