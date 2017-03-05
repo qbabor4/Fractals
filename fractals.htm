@@ -4,12 +4,10 @@
     - http://andrew-hoyer.com/experiments/fractals/
     - http://rosettacode.org/wiki/Fractal_tree#JavaScript
     - https://github.com/rembound/Mandelbrot-Fractal-HTML5/blob/master/mandelbrot-fractal.js
-    - http://www.atopon.org/mandel/# (prostokątem sie zoomuje
     - Request animation frames
     window.requestAnimationFrame(main);
     - maxiterations zmieniaz dokładnosc(?)
     - przepisac zoom fractal na jquery
-    - w generate palette mozna dac rgb do definiowania na paskach, albo na 1 pasku
     - kolo kolorów i tak generowac paletę // potem napisac zeby zmianiac liste w palette (przesunąć)
     - pokazac jaki kolor sie tworzy z przesuniec suwaków
 -->
@@ -31,6 +29,10 @@ canvas {
 </head>
 
 <body>
+Zoom in by clicking on the image of fractal<br /><br /><br />
+<p>Clicking while holding CTRL - Zoom back</p>
+<p>Clicking while holding SHIFT - Move to sides</p>
+
 RED 
 <br />
 0<input id="roffsetInputValue" type="range" max="255" min="0" value="24" oninput="roffsetOutputValue.value = roffsetInputValue.value"/> 255 Value: <output id="roffsetOutputValue">24</output></br>
@@ -46,10 +48,11 @@ BLUE
 <br /><br />
 <canvas id="myCanvas" width="800" height="600"> </canvas>
 </br>
-<p>Clicking while holding CTRL - Move away</p>
-<p>Clicking while holding SHIFT - Move to sides</p>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
+<script src="js/jquery.js"></script>
 <script src="js/fractals.js"></script>
+
 </body>
 </html>

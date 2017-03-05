@@ -2,7 +2,7 @@
 //Mandelbrot fractal
 
 //  canvas variables
-var canvas = $("#myCanvas")[0] //dostaje obiekt jquery a nie canvas jak jest bez [0]
+var canvas = $("#myCanvas")[0] //gets jquery objest (not canvas) without [0]
 var canvasContent = canvas.getContext("2d");
 var canvasWidth = canvas.width;
 var canvasHeight = canvas.height;
@@ -10,16 +10,17 @@ var canvasData = canvasContent.getImageData(0,0, canvasWidth, canvasHeight);
 
 var offsetx = -canvasWidth/2;
 var offsety = -canvasHeight/2;
-var panx = -100;
+var panx = -100; // movet to right for better view
 var pany = 0;
 var zoom = 150;
 
 // Palette array of 256 colors in object {r,g,b}
 var palette = [];
 
+// rgb values to create palette
 var roffset, goffset, boffset;
     
-// define values od a pixel
+//defines values od a pixel
 function drawPixel(x, y, r, g, b, a) {
     var index = ( x + y * canvasWidth) * 4  ; // data in canvasData ia an array, not matrix
     
@@ -36,7 +37,7 @@ function updateCanvas() {
 
 
 // Calculate the color of a specific pixel
-function iterate(x, y, imageWidth, imageHeight, maxiterations) {
+function calculateColor(x, y, imageWidth, imageHeight, maxiterations) {
     // Convert the screen coordinate to a fractal coordinate
     var x0 = (x + offsetx + panx) / zoom;
     var y0 = (y + offsety + pany) / zoom;  
@@ -89,7 +90,7 @@ function drawFractal(){
     for (var i = 0; i < canvasHeight + 1; i++) {
         for (var j = 0; j < canvasWidth + 1; j++){
             //drawPixel(j, i, 20,200,10,255); 
-            color = iterate(j, i, canvasWidth, canvasHeight, 250);
+            color = calculateColor(j, i, canvasWidth, canvasHeight, 250); //250
             //console.log(color.r, color.g, color.b);
             drawPixel(j, i, color.r, color.g, color.b, 255); 
         } 
@@ -97,71 +98,29 @@ function drawFractal(){
     updateCanvas();
 }
 
-
-
-function main(tframe){
-    // Add mouse events
-    canvas.addEventListener("mousedown", onMouseDown);
-        
-    // Request animation frames // nie wiem po co i jak uzyc
-    //window.requestAnimationFrame(main);
-
-    changeColorsValue();
-    generatePalette();
-}
-
-function init(){
-    main(0);
-    drawFractal();
-}
-
-
 // Zoom the fractal
-    function zoomFractal(x, y, factor, zoomin) {
-        if (zoomin) {
-            // Zoom in
-            zoom *= factor;
-            panx = factor * (x + offsetx + panx);
-            pany = factor * (y + offsety + pany);
-        } else {
-            // Zoom out
-            zoom /= factor;
-            panx = (x + offsetx + panx) / factor;
-            pany = (y + offsety + pany) / factor;
-        }
+function zoomFractal(x, y, factor, zoomin) {
+    if (zoomin) {
+        // Zoom in
+        zoom *= factor;
+        panx = factor * (x + offsetx + panx);
+        pany = factor * (y + offsety + pany);
+    } else {
+    // Zoom out
+        zoom /= factor;
+        panx = (x + offsetx + panx) / factor;
+        pany = (y + offsety + pany) / factor;
     }
-    
-    // Mouse event handlers
-    function onMouseDown(e) {
-        var pos = getMousePos(canvas, e);
-        
-        // Zoom out with Control
-        var zoomin = true;
-        if (e.ctrlKey) {
-            zoomin = false;
-        }
-        
-        // Pan with Shift
-        var zoomfactor = 2;
-        if (e.shiftKey) {
-            zoomfactor = 1;
-        }
-        
-        // Zoom the fractal at the mouse position
-        zoomFractal(pos.x, pos.y, zoomfactor, zoomin);
-        
-        // Generate a new image
-        drawFractal();
 }
-
+    
 // Get the mouse position
-    function getMousePos(canvas, e) {
-        var rect = canvas.getBoundingClientRect();
-        return {
-            x: Math.round((e.clientX - rect.left)/(rect.right - rect.left)*canvas.width),
-            y: Math.round((e.clientY - rect.top)/(rect.bottom - rect.top)*canvas.height)
-        };
-    }
+function getMousePos(canvas, e) {
+    var rect = canvas.getBoundingClientRect(); // zobaczyc jak działa
+    return {
+        x: Math.round((e.clientX - rect.left)/(rect.right - rect.left)*canvas.width),
+        y: Math.round((e.clientY - rect.top)/(rect.bottom - rect.top)*canvas.height)
+    };
+}
 
 
 function changeColorsValue() {
@@ -179,9 +138,45 @@ function drawNewColorFractal() {
 }
 
 
+function zoomFrame(){
+    $("canvas#myCanvas").on('mousedown', function(e){
+        var pos = getMousePos(canvas, e);
+        
+        // Zoom out with Control
+        var zoomin = true;
+        if (e.ctrlKey) {
+            zoomin = false;
+        }
+        
+        // Move to sides with Shift
+        var zoomfactor = 2;
+        if (e.shiftKey) {
+            zoomfactor = 1;
+        }
+        
+        // Zoom the fractal at the mouse position
+        zoomFractal(pos.x, pos.y, zoomfactor, zoomin);
+        
+        // Generate new image
+        drawFractal();
+    });
+}
 
+function main(tframe){
+    // Request animation frames // nie wiem po co i jak uzyc
+    //window.requestAnimationFrame(main);
+    
+    zoomFrame();
+    changeColorsValue();
+    generatePalette();
+}
 
-
-
+function init(){
+    main(0);
+    drawFractal();
+}
 
 init();
+
+
+
