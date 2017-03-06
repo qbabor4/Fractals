@@ -6,12 +6,16 @@
     - https://github.com/rembound/Mandelbrot-Fractal-HTML5/blob/master/mandelbrot-fractal.js
     - Request animation frames
     window.requestAnimationFrame(main);
-    - maxiterations zmieniaz dokładnosc(?)
-    - przepisac zoom fractal na jquery
     - kolo kolorów i tak generowac paletę // potem napisac zeby zmianiac liste w palette (przesunąć)
-    - pokazac jaki kolor sie tworzy z przesuniec suwaków
-    - po odswierzeniu value na pasku jest inna niz wartosc na outpucie... //zmienic (1)
+    - zoom podaje do funkcji parametry takie jak pany a nie ze są jako zmienne globalne. (zobaczys czy sie da)
+    - w generowaniu palety zmienic tak zeby do 255 sie dodawało i podzielic na 3 255 i tak podzielic dodawanie do kolorow
+    - zamiana na img
+    - funkcja do zoomowania julii przez pozycję myszki
+    - zastapic y0 i x0 w mandelbrocie tymi z lodev
+    - zobaczyc czym sie rózną oba i zrobic 1 funkcję o obu
+    - ten sam zoom dla obu fraktali, tylko po przełączeniu zerują się wartosci zoom i pany panx
 -->
+
 <head>
 	<meta http-equiv="content-type" content="text/html" />
 	<meta name="Jakub Borówka" content="Fractals" />
@@ -32,6 +36,14 @@ canvas {
     height:40px;
     background: #181000;
 }
+
+#mandelbrot, #julia{
+    height:30px;
+    width:120px;
+    background: #222;
+    color: #ddd;
+    margin: 0 0 20px 0;
+}
 </style>
 </head>
 
@@ -39,6 +51,10 @@ canvas {
 Zoom in by clicking on the image of fractal<br /><br /><br />
 <p>Clicking while holding CTRL - Zoom back</p>
 <p>Clicking while holding SHIFT - Move to sides</p>
+
+<input type="button" id="mandelbrot" value="Mandlebrot" onclick="chooseMandelbrot()"/> <br />
+<input type="button" id="julia" value="Julia set" onclick="chooseJulia()" /><br />
+
 
 RED 
 <br />
