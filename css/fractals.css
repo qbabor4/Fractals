@@ -1,0 +1,25 @@
+canvas {
+    border: 1px solid #000;    
+}
+
+#lol {   
+    width:30px;
+}
+
+#colorPreview{
+    width:40px;
+    height:40px;
+    background: #181000;
+}
+
+#mandelbrot, #julia, #fern{
+    height:30px;
+    width:120px;
+    background: #222;
+    color: #ddd;
+    margin: 0 0 20px 0;
+}
+
+#loadingGif {
+    visibility:hidden;
+}

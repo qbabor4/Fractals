@@ -1,0 +1,40 @@
+#hsvCircleImage {
+    margin: 30px;   
+}
+
+#colorPreview{
+    width:40px;
+    height:40px;
+    background: #000;
+}
+
+#hsvContainer {
+    position: relative; 
+    width: 302px;
+    height: 302px;
+    -webkit-user-select: none; /* not selectable */
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -ms-user-select: none;
+}
+
+#hsvCircle, #blackFilter {
+    position: absolute;
+    top:0;
+    left:0;
+    width:302px;
+    height:302px;
+}
+
+#blackFilter{
+    background: #000;
+    opacity: 0;
+    z-index:10;
+    border-radius: 50%;
+    pointer-events: none; /* This div is not clicable */
+}
+
+#hsvCircle{
+    background: url("../img/hsvCircleFit.png");
+    opacity: 1;
+}
