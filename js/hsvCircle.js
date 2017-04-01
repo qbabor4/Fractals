@@ -1,7 +1,7 @@
 var circleImage = $("#hsvCircle");
 var circleRadius = circleImage.width()/2; 
-var HSVhue = 0;
-var HSVsaturation = 0;
+var HSVhue = 235;
+var HSVsaturation = 1;
 var HSVvalue = 1;
 var clicked = false;
 

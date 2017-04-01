@@ -26,8 +26,8 @@ var fractalName = "mandelbrot";
 
 // rgb values to create palette
 var roffset = 0;
-var goffset = 0;
-var boffset = 0;
+var goffset = 21;
+var boffset = 255;
     
 //defines values od a pixel
 function drawPixel( x, y, r, g, b, a ) {
@@ -79,7 +79,7 @@ function calculateMandelbrotPixelColor(x, y, maxIterations) { //wywalic argument
     // Get palette color based on the number of iterations
     var color;
     if ( iterations == maxIterations ) { // tu dac zmienne globalne ( w julii tez )
-        color = { r:255, g:255, b:255 }; // Black
+        color = { r:0, g:0, b:0 }; // Black
     } else {
         var index = Math.floor(( iterations / ( maxIterations-1)) * 255);
         color = palette[ index ];
@@ -103,7 +103,7 @@ function calculateJulia( x, y, maxIterations ){
 		 iterations += 1;
     }
     
-    // TODO: dac do funkcji
+    // TODO: dac do funkcji (pobiera iterations)
     if ( iterations == maxIterations ) {
         var color = { r:0, g:0, b:0 }; // Black 
     } else {
@@ -117,14 +117,14 @@ function calculateJulia( x, y, maxIterations ){
 
 // Calculate and generate colors palette
 function generatePalette() {
+    console.log(roffset);
     for ( var i = 0; i < 256; i++ ) {
         palette[ i ] = { r: roffset, g: goffset, b: boffset};    
-        
         if ( i < 85 ) {
             roffset += 3;
-        } else if ( i<170 ) {
+        } else if ( i < 170 ) {
             goffset += 3;
-        } else if ( i<256 ) {
+        } else if ( i < 256 ) {
             boffset += 3;
         }
     }
@@ -186,10 +186,11 @@ function changeColorsValue() {
 }
 
 function drawNewFractal() {       
-        console.log("New Color Fractal");
-        changeColorsValue();
-        generatePalette();
-        drawFractal( fractalName );
+    console.log("New Color Fractal");
+    changeColorsValue();
+    generatePalette();
+        console.log(palette);
+    drawFractal( fractalName );
 }
 
 function drawNewFractalWithGif(){
