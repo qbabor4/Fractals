@@ -7,8 +7,6 @@
     - Request animation frames
     window.requestAnimationFrame(main);
     
-    - kolo kolorów i tak generowac paletę // potem napisac zeby zmianiac liste w palette (przesunąć)
-    - zamiana na img
     - canvas w internet explorer
     - przepisac funkcje z podkreslinikiem
     - dopisek przy zmianie maxymalnej wartosci ze jak duzo to bedzie wolniej 
@@ -16,7 +14,6 @@
     - dodawanie i znikanie okienek do zmiany danych przy julii i mandelu
     - zmiana koloru wnętrze ( teraz jest na sztywo 0 0 0 jak wychodzi poza iteracje)
     - dopasowanie canvasa do ekranu 
-    - pokazanie jako png
     - radio buttony do zmiany czy kolor wnętrza czy zewnetrza
     - cofanie oddalenia guzikiem (czy jakos) zeby na mobilnych było łatwo
     - zmiana rozdzielczosci dla pokazywanego zdjecia
@@ -31,6 +28,9 @@
     - fixed fraktal na srodku z czarnym tłem dokokoła i krzyzykiem do zamkniecia
     - jak pierwszy raz kts przychodzi ( ciasteczka ), to wyswietla sie instrukcja jak uzywac
     - kolko hsv moze nie dzialac przy responsywnych stronach ( zmiana lokacji zdjecia kolka nie zmiania zmiennych )
+    - guzik cos robi po zmianieniu koloru czy innych rzeczy zeby nacisnąć
+    - zrobic wybór czemu zmianiac kolor: tła czy srodka
+    - jak sie zapisze zdjecie a potem z zakładek wejdzie, to ucina spód ( adres jest długo to moze ucina )( pokazac zdj jako stronę )
 -->
 <!DOCTYPE HTML>
 
@@ -40,6 +40,8 @@
     <meta charset="utf-8" />
     
     <link rel="stylesheet" type="text/css" href="css/fractals.css" />
+    <link rel="stylesheet" type="text/css" href="css/hsvCircle.css" />
+    
 
 	<title>Untitled 1</title>
 
@@ -54,26 +56,23 @@
 <input type="button" id="mandelbrot" value="Mandlebrot" onclick="chooseMandelbrot()"/> <br />
 <input type="button" id="julia" value="Julia set" onclick="chooseJulia()" /><br />
 
-RED 
-<br />
-0<input id="roffsetInputValue" type="range" autocomplete="off" max="255" min="0" value="24" oninput="roffsetOutputValue.value = roffsetInputValue.value"/> 255 value: 
-<output id="roffsetOutputValue">24</output><br />
-GREEN 
-<br /> 
-0<input id="goffsetInputValue" type="range" autocomplete="off" max="255" min="0" value="16" oninput="goffsetOutputValue.value = goffsetInputValue.value"/> 255 value: 
-<output id="goffsetOutputValue">16</output> <br />
-BLUE 
-<br />
-0<input id="boffsetInputValue" type="range" autocomplete="off" max="255" min="0" value="0" oninput="boffsetOutputValue.value = boffsetInputValue.value"/> 255 value: 
-<output id="boffsetOutputValue">0</output> <br />
-<br />
+<div id="hsvContainer">
+    <div id="hsvCircle"> </div>
+    <div id="blackFilter"> </div>
+</div>
 
-Color prewiew: (Use darker colors for better effect)
+Brightness : <br />
+<input type="range" id="HSVvalueInput" min="0" max="1" step="0.01" autocomplete="off" value="1" oninput="HSVvalueOutput.value = HSVvalueInput.value" />
+<output id="HSVvalueOutput"> 1 </output>
+
 <div id="colorPreview"></div><br />
+
 
 <input type="button" id="makePng" value="Show as image" onclick="showAsPng()" /><br /><br />
 
+<!--
 <input type="button" id="changeResolution" value="change resolution" onclick="chooseResolutionForImage()" /><br /><br />
+-->
 
 <input type="button" id="changeColorsvalue" value="Draw new fractal" onclick="drawNewFractalWithGif()"/> 
 <img src="img/ajax-loader.gif" id="loadingGif" /><br />
@@ -87,10 +86,10 @@ Numbers of Iterations: <br />
 <br />
 
 
-<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
 <script src="js/jquery.js"></script>
-<script src="js/fractals2.js"></script>
+<script src="js/fractals.js"></script>
 <script src="js/elementsAction.js"></script>
+<script src="js/hsvCircle.js"></script>
 
 </body>
 </html>
