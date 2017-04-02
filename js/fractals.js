@@ -10,7 +10,7 @@ var canvasData = canvasContent.getImageData( 0, 0, canvasWidth, canvasHeight );
 // Fractals variables
 var offsetx = - canvasWidth / 2;
 var offsety = - canvasHeight / 2;
-var panX = - 100; // movet to right for better view // -100
+var panX = -100; // move to the right for better view // -100
 var panY = 0;
 var zoom = 250; //150
 
@@ -23,7 +23,7 @@ var palette = [];
 // Name of fractal that should be drawn
 var fractalName = "mandelbrot";
 
-// rgb values to create palette
+// rgb values to create palette (outside colors)
 var roffset = 0;
 var goffset = 21;
 var boffset = 255;
@@ -33,8 +33,12 @@ var rInside = 0;
 var gInside = 0;
 var bInside = 0;
 
-// defines what set of colors are chosen;
+// defines what set of colors is chosen;
 var colorPositionOutside = true;
+
+//values for shape changes
+value1Iter = 0;
+value2Iter = 0;
 
 //defines values od a pixel
 function drawPixel( x, y, r, g, b, a ) {
@@ -69,8 +73,8 @@ function calculateMandelbrotPixelColor(x, y, maxIterations) { //wywalic argument
     var y0 = ( y + offsety + panY ) / zoom;  
        
     // Iteration variables
-    var a = 0; //0 // zmiana tego co 0.01 //1.7 max
-    var b = 0; // 1.2 max co 0.01
+    var a = value1Iter; //0 // zmiana tego co 0.01 //1.7 max
+    var b = value2Iter; // 1.2 max co 0.01
     var rx = 0;
     var ry = 0;
         
@@ -93,11 +97,12 @@ function calculateMandelbrotPixelColor(x, y, maxIterations) { //wywalic argument
     }    
     return color;
 }
+// zmiana zmiannych jak zmiana na inpucie
 
 function calculateJulia( x, y, maxIterations ){
     
-    var cX = -0.7; //zmieniac zeby dstac inne kształty //0.7
-    var cY = 0.27015; //0.27015
+    var cX = value1Iter;  //-0.7 // -1.2 do 0.5 co 0.01
+    var cY = value2Iter; //0.27015 // 28025 spoko  // od 0 do 0.5 co 0.0005 
  
     var zx = ( x + offsetx + panX ) / zoom;
     var zy = ( y + offsety + panY ) / zoom; 
@@ -217,6 +222,10 @@ function chooseJulia(){
     panX = 0;
     panY = 0;
     zoom = 250;
+    value1Iter = -0.7;
+    value2Iter = 0.27115;
+    setInuptOutputRangeParameters( value1Input, value1Output, 0.5, -1.2, 0.01, -0.7);
+    setInuptOutputRangeParameters( value2Input, value2Output, 0.5, 0, 0.0005, 0.27015);
     setMaxIterationsOnInputRange(30000);
     drawFractal( fractalName );    
 }
@@ -226,8 +235,25 @@ function chooseMandelbrot(){
     panX = -100;
     panY = 0;
     zoom = 250;
+    value1Iter = 0;
+    value2Iter = 0;
+    console.log(value1Input);
+    setInuptOutputRangeParameters( value1Input, value1Output, 1.7, 0, 0.01, 0);
+    setInuptOutputRangeParameters( value2Input, value2Output, 1.2, 0, 0.01, 0);
     setMaxIterationsOnInputRange(1000);
     drawFractal( fractalName );    
+}
+
+function setInuptOutputRangeParameters( inputId, outputId, max, min, step, value ){
+    var input = $("#" + inputId.id ); 
+    var output = $("#" +  outputId.id );
+    
+    input.attr("max", max);
+    input.attr("min", min);
+    input.attr("step", step);
+    input.attr("value", value);
+    inputId.value = value;
+    outputId.value = value;
 }
 
 // set value of max iterations (in while loop) for calculating fractal

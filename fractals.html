@@ -10,8 +10,6 @@
     - canvas w internet explorer
     - przepisac funkcje z podkreslinikiem
     - dopisek przy zmianie maxymalnej wartosci ze jak duzo to bedzie wolniej 
-    - zmiana wartosci w funkcjach rysowania zeby rysowac inne 
-    - dodawanie i znikanie okienek do zmiany danych przy julii i mandelu
     - zmiana koloru wnętrze ( teraz jest na sztywo 0 0 0 jak wychodzi poza iteracje)
     - dopasowanie canvasa do ekranu 
     - radio buttony do zmiany czy kolor wnętrza czy zewnetrza
@@ -85,7 +83,15 @@
         
         Numbers of Iterations: <br />
         <input id="maxIterationsInput" type="range" autocomplete="off" max="1000" min="10" value="255" oninput="maxIterationsOutput.value = maxIterationsInput.value" /> 
-        <output id="maxIterationsOutput">255 </output><br /><br />
+        <output id="maxIterationsOutput">255 </output><br />
+        
+        Value1: <br />
+        <input type="range" id="value1Input" autocomplete="off" max="1.7" min="0" step="0.01" value="0" oninput="value1Output.value = value1Input.value" />
+        <output id="value1Output"> 0 </output><br />
+        
+        Value2: <br />
+        <input type="range" id="value2Input" autocomplete="off" max="1.2" min="0" step="0.01" value="0" oninput="value2Output.value = value2Input.value" />
+        <output id="value2Output"> 0 </output><br />
         
         <input type="button" id="makePng" value="Show as image" onclick="showAsPng()" /><br /><br />
         
