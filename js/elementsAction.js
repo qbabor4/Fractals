@@ -24,6 +24,15 @@ $(document).ready(function(){
         drawFractal( fractalName );
     });
     
+    $('input[name="colorPositionName"]').on("change", function(){
+        colorPosition =  $('input[name="colorPositionName"]:checked').val(); // outside or inside
+        if (colorPosition == "outside"){
+            colorPositionOutside = true;
+        }
+        else{
+            colorPositionOutside = false;
+        }
+    });
     
     
 });

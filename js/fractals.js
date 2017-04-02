@@ -28,6 +28,14 @@ var roffset = 0;
 var goffset = 21;
 var boffset = 255;
     
+// rgb values for inside colors
+var rInside = 0;
+var gInside = 0;
+var bInside = 0;
+
+// defines what set of colors are chosen;
+var colorPositionOutside = true;
+
 //defines values od a pixel
 function drawPixel( x, y, r, g, b, a ) {
     var index = ( x + y * canvasWidth ) * 4  ; // data in canvasData ia an array, not matrix
@@ -77,8 +85,8 @@ function calculateMandelbrotPixelColor(x, y, maxIterations) { //wywalic argument
     }    
     // Get palette color based on the number of iterations
     var color;
-    if ( iterations == maxIterations ) { // tu dac zmienne globalne ( w julii tez )
-        color = { r:0, g:0, b:0 }; // Black
+    if ( iterations == maxIterations ) { 
+        color = { r: rInside, g: gInside, b: bInside }; 
     } else {
         var index = Math.floor(( iterations / ( maxIterations-1)) * 255);
         color = palette[ index ];
@@ -104,7 +112,7 @@ function calculateJulia( x, y, maxIterations ){
     
     // TODO: dac do funkcji (pobiera iterations)
     if ( iterations == maxIterations ) {
-        var color = { r:0, g:0, b:0 }; // Black 
+        var color = { r: rInside , g: gInside, b: bInside }; // Black 
     } else {
         var index = Math.floor(( iterations / ( maxIterations - 1 )) * 255);
         color = palette[ index ];
@@ -116,7 +124,6 @@ function calculateJulia( x, y, maxIterations ){
 
 // Calculate and generate colors palette
 function generatePalette() {
-    console.log(roffset);
     for ( var i = 0; i < 256; i++ ) {
         palette[ i ] = { r: roffset, g: goffset, b: boffset};    
         if ( i < 85 ) {
@@ -175,20 +182,28 @@ function getMousePos( canvas, e ) {
     };
 }
 
-function changeColorsValue() { 
+function changeOutsideColorsValue() { 
     rgbColors = HSVtoRGB(HSVhue, HSVsaturation, HSVvalue);
-    console.log(rgbColors);
-    roffset = parseInt( rgbColors.r ); // zobaczys czy mozna usunac parseInt
-    goffset = parseInt( rgbColors.g );
-    boffset = parseInt( rgbColors.b );
-    //console.log(roffset, goffset, boffset);
+    roffset =  rgbColors.r ; 
+    goffset =  rgbColors.g ;
+    boffset =  rgbColors.b ;
 }
 
-function drawNewFractal() {       
-    console.log("New Color Fractal");
-    changeColorsValue();
-    generatePalette();
-        console.log(palette);
+function changeInsideColorsValue(){
+    rgbColors = HSVtoRGB(HSVhue, HSVsaturation, HSVvalue);
+    rInside = rgbColors.r ; 
+    gInside = rgbColors.g;
+    bInside = rgbColors.b ;
+}
+
+function drawNewFractal() {
+    if (colorPositionOutside){
+        changeOutsideColorsValue();
+        generatePalette();
+    }
+    else{
+        changeInsideColorsValue();
+    }
     drawFractal( fractalName );
 }
 
