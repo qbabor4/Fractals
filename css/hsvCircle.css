@@ -32,6 +32,8 @@
 
 #blackFilter{
     background: #000;
+    /*width: 305px;
+    height: 305px;*/
     opacity: 0;
     z-index:10;
     border-radius: 50%;

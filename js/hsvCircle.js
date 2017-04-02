@@ -96,6 +96,7 @@ function HSVtoRGB(H, S, V)
 
 function changePreviewDivColor(){
     rgbColors = HSVtoRGB(HSVhue, HSVsaturation, HSVvalue);
+    //console.log(rgbColors);
     $("div#colorPreview").css("background", "rgb("+ rgbColors.r +","+ 
             rgbColors.g +","+  rgbColors.b +")");
 }

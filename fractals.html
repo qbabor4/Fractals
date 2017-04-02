@@ -36,6 +36,8 @@
     - dac prewiew diva w prawy dolny rog kola kolorow i zrobić z niego koło
     - jak wyjedzie sie poza koło z nacisnietym lewym przyciskiem myszy, to potem jak sie wraca, to kolory sie same zmianiają( bez nacisniecia przycisku)
     -^ bool clicked sie nie zmiania jak puscimy poza divem (np. zmiana clicked na false jak sie opuści koło )(albo jak ogólnie puści to tez zmiana)
+    - cos przy zmianie kolorów na prewievdiv np jakas biała obwódka (albo na stałe biała)
+    - poprawic koło w photoshopie, bo jak sie daje wiecej opacity, to wyglada źle
 -->
 
 <!DOCTYPE HTML>
@@ -55,41 +57,48 @@
 
 <body>
 
-<p>Zoom in by clicking on the image of fractal</p>
-<p>Clicking while holding CTRL - Zoom back</p>
-<p>Clicking while holding SHIFT - Move to sides</p>
-
-<input type="button" id="mandelbrot" value="Mandlebrot" onclick="chooseMandelbrot()"/> <br />
-<input type="button" id="julia" value="Julia set" onclick="chooseJulia()" /><br />
-
-<div id="hsvContainer">
-    <div id="hsvCircle"> </div>
-    <div id="blackFilter"> </div>
-    <div id="colorPreview"></div><br />
+<div id="container">
+    <div id="left-container">
+        <p>Zoom in by clicking on the image of fractal</p>
+        <p>Clicking while holding CTRL - Zoom back</p>
+        <p>Clicking while holding SHIFT - Move to sides</p>
+        
+        <br />
+        <input type="button" id="mandelbrot" value="Mandlebrot" onclick="chooseMandelbrot()"/> 
+        <input type="button" id="julia" value="Julia set" onclick="chooseJulia()" /><br />
+        
+        <div id="hsvContainer">
+            <div id="hsvCircle"> </div>
+            <div id="blackFilter"> </div>
+            <div id="colorPreview"></div><br />
+        </div>
+        
+        Brightness : <br />
+        <input type="range" id="HSVvalueInput" min="0" max="1" step="0.01" autocomplete="off" value="1" oninput="HSVvalueOutput.value = HSVvalueInput.value" />
+        <output id="HSVvalueOutput"> 1 </output> <br />
+        
+        Numbers of Iterations: <br />
+        <input id="maxIterationsInput" type="range" autocomplete="off" max="1000" min="10" value="255" oninput="maxIterationsOutput.value = maxIterationsInput.value" /> 
+        <output id="maxIterationsOutput">255 </output><br /><br />
+        
+        <!--<div id="colorPreview"></div><br /> -->
+        
+        
+        <input type="button" id="makePng" value="Show as image" onclick="showAsPng()" /><br /><br />
+        
+        <!--
+        <input type="button" id="changeResolution" value="change resolution" onclick="chooseResolutionForImage()" /><br /><br />
+        -->
+        
+        <input type="button" id="changeColorsvalue" value="Draw new fractal" onclick="drawNewFractalWithGif()"/> 
+        <img src="img/ajax-loader.gif" id="loadingGif" /><br /><br />
+    </div>
+    <div id="right-container">
+        <canvas id="myCanvas" width="800" height="600"> </canvas>
+    </div>
 </div>
 
-Brightness : <br />
-<input type="range" id="HSVvalueInput" min="0" max="1" step="0.01" autocomplete="off" value="1" oninput="HSVvalueOutput.value = HSVvalueInput.value" />
-<output id="HSVvalueOutput"> 1 </output> <br />
 
-<!--<div id="colorPreview"></div><br /> -->
-
-
-<input type="button" id="makePng" value="Show as image" onclick="showAsPng()" /><br /><br />
-
-<!--
-<input type="button" id="changeResolution" value="change resolution" onclick="chooseResolutionForImage()" /><br /><br />
--->
-
-<input type="button" id="changeColorsvalue" value="Draw new fractal" onclick="drawNewFractalWithGif()"/> 
-<img src="img/ajax-loader.gif" id="loadingGif" /><br />
-
-Numbers of Iterations: <br />
-<input id="maxIterationsInput" type="range" autocomplete="off" max="1000" min="10" value="255" oninput="maxIterationsOutput.value = maxIterationsInput.value" /> 
-<output id="maxIterationsOutput">255 </output><br /><br />
-
-
-<canvas id="myCanvas" width="800" height="600"> </canvas>
 <br />
 
 
