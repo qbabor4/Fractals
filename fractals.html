@@ -37,7 +37,8 @@
     - jak wyjedzie sie poza koło z nacisnietym lewym przyciskiem myszy, to potem jak sie wraca, to kolory sie same zmianiają( bez nacisniecia przycisku)
     -^ bool clicked sie nie zmiania jak puscimy poza divem (np. zmiana clicked na false jak sie opuści koło )(albo jak ogólnie puści to tez zmiana)
     - cos przy zmianie kolorów na prewievdiv np jakas biała obwódka (albo na stałe biała)
-    - poprawic koło w photoshopie, bo jak sie daje wiecej opacity, to wyglada źle
+    - poprawic koło w photoshopie, bo jak sie daje wiecej opacity, to wyglada źle (albo wiekszy div z opacity(lepiej))
+    - guzik z generowanie na dół
 -->
 
 <!DOCTYPE HTML>
@@ -90,8 +91,8 @@
         <input type="button" id="changeResolution" value="change resolution" onclick="chooseResolutionForImage()" /><br /><br />
         -->
         
-        <input type="button" id="changeColorsvalue" value="Draw new fractal" onclick="drawNewFractalWithGif()"/> 
-        <img src="img/ajax-loader.gif" id="loadingGif" /><br /><br />
+        <input type="button" id="drawNewFractal" value="Draw new fractal" onclick="drawNewFractalWithGif()"/> 
+        <img src="img/ajax-loader.gif" id="loadingGif" /><br /><br />   
     </div>
     <div id="right-container">
         <canvas id="myCanvas" width="800" height="600"> </canvas>

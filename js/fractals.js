@@ -1,6 +1,5 @@
 // Fractals generator
 
-
 // Canvas variables
 var canvas = $( "#myCanvas" )[ 0 ] //gets jquery object (not canvas element) without [0]
 var canvasContent = canvas.getContext( "2d" );
