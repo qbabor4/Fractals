@@ -34,6 +34,8 @@
     - zmiana prewiew diva ( i koloru ) jak zmiana brightness
     - zmienic koolor prewiew diva na poczatku
     - dac prewiew diva w prawy dolny rog kola kolorow i zrobić z niego koło
+    - jak wyjedzie sie poza koło z nacisnietym lewym przyciskiem myszy, to potem jak sie wraca, to kolory sie same zmianiają( bez nacisniecia przycisku)
+    -^ bool clicked sie nie zmiania jak puscimy poza divem (np. zmiana clicked na false jak sie opuści koło )(albo jak ogólnie puści to tez zmiana)
 -->
 
 <!DOCTYPE HTML>
@@ -63,13 +65,14 @@
 <div id="hsvContainer">
     <div id="hsvCircle"> </div>
     <div id="blackFilter"> </div>
+    <div id="colorPreview"></div><br />
 </div>
 
 Brightness : <br />
 <input type="range" id="HSVvalueInput" min="0" max="1" step="0.01" autocomplete="off" value="1" oninput="HSVvalueOutput.value = HSVvalueInput.value" />
-<output id="HSVvalueOutput"> 1 </output>
+<output id="HSVvalueOutput"> 1 </output> <br />
 
-<div id="colorPreview"></div><br />
+<!--<div id="colorPreview"></div><br /> -->
 
 
 <input type="button" id="makePng" value="Show as image" onclick="showAsPng()" /><br /><br />

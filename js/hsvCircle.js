@@ -72,6 +72,7 @@ $("#HSVvalueInput").on("change", function() {
     HSVvalue = parseFloat(HSVvalueInput.value);
     changeHSVcircleOpacity();
     changeHTMLoutput();
+    changePreviewDivColor();
 });
 
 function mix(a, b, v)
