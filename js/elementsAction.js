@@ -8,12 +8,14 @@ $(document).ready(function(){
     
     $(document).on("change", $("input[range][id='value1Input']"), function(){
         value1Iter = parseFloat( value1Input.value );
+        console.log(value1Iter);
         
     });
     
     $(document).on("change", $("input[range][id='value2Input']"), function(){
         // seting maxIterations value for fractals
         value2Iter = parseFloat( value2Input.value );
+        console.log(value2Iter);
         
     });
     

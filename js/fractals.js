@@ -223,9 +223,9 @@ function chooseJulia(){
     panY = 0;
     zoom = 250;
     value1Iter = -0.7;
-    value2Iter = 0.27115;
+    value2Iter = 0.27;
     setInuptOutputRangeParameters( value1Input, value1Output, 0.5, -1.2, 0.01, -0.7);
-    setInuptOutputRangeParameters( value2Input, value2Output, 0.5, 0, 0.0005, 0.27015);
+    setInuptOutputRangeParameters( value2Input, value2Output, 0.5, 0, 0.0005, 0.27);
     setMaxIterationsOnInputRange(30000);
     drawFractal( fractalName );    
 }
