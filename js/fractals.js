@@ -79,7 +79,8 @@ function changeResolution(){
     canvasHeight = resolutionArray[1];
     canvasData = canvasContent.getImageData( 0, 0, canvasWidth, canvasHeight );
     
-    $('canvas#myCanvas').appendTo($('body')); // moves canvas to body
+    $('canvas#myCanvas').appendTo($('#biggercanvas')); // moves canvas to body
+    //$('canvas#myCanvas').css("margin", "auto");
     
     drawNewFractalWithGif();
     pageScroll( canvasHeight ); 
