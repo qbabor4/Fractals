@@ -60,10 +60,20 @@ function showAsPng(){
     var newWindow = window.open(png);   
 }
 
-function chooseResolutionForImage(){
-    // wybor resolution i pokazanie zdjecia
-    // jak zmiana wielkosci canvasa to musi byc przesunięcie
-       
+function changeResolution(){
+    // wybór jakie wymiary ( div pojawiajacy sie z radio inputami i guzikiem ok i anuluj )
+    // wyczaic zaleźnosci z panX i zoom przy zmianie rezdzielczosci
+    var canvasElement = $( "#myCanvas" );
+    canvasElement.attr("width", 1200);
+    canvasElement.attr("height", 800);   
+    canvasWidth = 1200;
+    canvasHeight = 800;
+    canvasData = canvasContent.getImageData( 0, 0, canvasWidth, canvasHeight );
+    offsetx = - canvasWidth / 2;
+    offsety = - canvasHeight / 2;
+    panX = -200;
+    zoom = 330;
+    drawNewFractalWithGif(); 
 }
 
 // Calculate the color of a specific pixel
@@ -213,7 +223,7 @@ function drawNewFractal() {
 }
 
 function drawNewFractalWithGif(){
-    // asynchronicznie zrobic z settimeout jakos      
+    // asynchronicznie zrobic z settimeout jakos (albo wątki normalnie)      
     drawNewFractal();   
 }
 

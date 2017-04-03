@@ -1,18 +1,8 @@
 <!-- TODO:
-    - fraktale w css
-    - http://andrew-hoyer.com/experiments/fractals/
-    - http://rosettacode.org/wiki/Fractal_tree#JavaScript
-    - https://github.com/rembound/Mandelbrot-Fractal-HTML5/blob/master/mandelbrot-fractal.js
-    
     - Request animation frames
     window.requestAnimationFrame(main);
-    
-    - canvas w internet explorer
-    - przepisac funkcje z podkreslinikiem
+    - canvas w internet explorer nie działą
     - dopisek przy zmianie maxymalnej wartosci ze jak duzo to bedzie wolniej 
-    - zmiana koloru wnętrze ( teraz jest na sztywo 0 0 0 jak wychodzi poza iteracje)
-    - dopasowanie canvasa do ekranu 
-    - radio buttony do zmiany czy kolor wnętrza czy zewnetrza
     - cofanie oddalenia guzikiem (czy jakos) zeby na mobilnych było łatwo
     - zmiana rozdzielczosci dla pokazywanego zdjecia
     - zmiana kloru guzika do rysowania nowego fraktala po zmianie iteracji czy koloru
@@ -20,25 +10,17 @@
     - web workers 
     - PUSCIC LICZNIE FRAKTALA NA WATKU!!!!!!
     - watek dla iteracji i dla rysowania pixeli
-    - dla a = 0.4 jest dobre (mandel)
-    - biała julia dla małych iteracji 
-    - zmiana koloru środka
     - fixed fraktal na srodku z czarnym tłem dokokoła i krzyzykiem do zamkniecia
-    - jak pierwszy raz kts przychodzi ( ciasteczka ), to wyswietla sie instrukcja jak uzywac
+    - jak pierwszy raz ktos przychodzi ( ciasteczka ), to wyswietla sie instrukcja jak uzywac
     - kolko hsv moze nie dzialac przy responsywnych stronach ( zmiana lokacji zdjecia kolka nie zmiania zmiennych )
     - guzik cos robi po zmianieniu koloru czy innych rzeczy zeby nacisnąć
-    - zrobic wybór czemu zmianiac kolor: tła czy srodka
     - jak sie zapisze zdjecie a potem z zakładek wejdzie, to ucina spód ( adres jest długo to moze ucina )( pokazac zdj jako stronę ) 
-    - zmiana prewiew diva ( i koloru ) jak zmiana brightness
-    - zmienic koolor prewiew diva na poczatku
-    - dac prewiew diva w prawy dolny rog kola kolorow i zrobić z niego koło
     - jak wyjedzie sie poza koło z nacisnietym lewym przyciskiem myszy, to potem jak sie wraca, to kolory sie same zmianiają( bez nacisniecia przycisku)
     -^ bool clicked sie nie zmiania jak puscimy poza divem (np. zmiana clicked na false jak sie opuści koło )(albo jak ogólnie puści to tez zmiana)
-    - cos przy zmianie kolorów na prewievdiv np jakas biała obwódka (albo na stałe biała)
-    - poprawic koło w photoshopie, bo jak sie daje wiecej opacity, to wyglada źle (albo wiekszy div z opacity(lepiej))
+    -  wiekszy div z opacity i absolute, albo jakis inaczej przesujac na srodek
     - guzik z generowanie na dół
     - tworzenie zdjecia na wątku
-    - jak zmiana suwakiem to dla kazdego w eleemntAction sie wykonuje ( dostac sie do specyficznego inputa )
+    - dac wieksze canvasy na dół poza containerem i dac zeby były na srodku
 -->
 
 <!DOCTYPE HTML>
@@ -92,13 +74,10 @@
         
         Value2: <br />
         <input type="range" id="value2Input" autocomplete="off" max="1.2" min="0" step="0.01" value="0" oninput="value2Output.value = value2Input.value" />
-        <output id="value2Output"> 0 </output><br />
+        <output id="value2Output"> 0 </output><br /><br />
         
-        <input type="button" id="makePng" value="Show as image" onclick="showAsPng()" /><br /><br />
-        
-        <!--
-        <input type="button" id="changeResolution" value="change resolution" onclick="chooseResolutionForImage()" /><br /><br />
-        -->
+        <input type="button" id="makePng" value="Show as image" onclick="showAsPng()" />
+        <input type="button" id="changeResolution" value="change resolution" onclick="changeResolution()" /><br /><br />
         
         <input type="button" id="drawNewFractal" value="Change Fractal" onclick="drawNewFractalWithGif()"/> 
         <img src="img/ajax-loader.gif" id="loadingGif" /><br /><br />   
