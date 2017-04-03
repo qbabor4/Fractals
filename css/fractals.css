@@ -51,3 +51,19 @@ canvas {
     font-size:20px;
     letter-spacing:2px;  
 }
+
+#resulutionContainer {
+    background: #333;
+    width: 180px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 15;
+    padding: 30px;
+    margin: -200px 0 0 -90px;
+    font-size: 100%;
+    letter-spacing: 3px;
+    display:none;
+}
+
+

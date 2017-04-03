@@ -17,10 +17,8 @@
     - jak sie zapisze zdjecie a potem z zakładek wejdzie, to ucina spód ( adres jest długo to moze ucina )( pokazac zdj jako stronę ) 
     - jak wyjedzie sie poza koło z nacisnietym lewym przyciskiem myszy, to potem jak sie wraca, to kolory sie same zmianiają( bez nacisniecia przycisku)
     -^ bool clicked sie nie zmiania jak puscimy poza divem (np. zmiana clicked na false jak sie opuści koło )(albo jak ogólnie puści to tez zmiana)
-    -  wiekszy div z opacity i absolute, albo jakis inaczej przesujac na srodek
-    - guzik z generowanie na dół
     - tworzenie zdjecia na wątku
-    - dac wieksze canvasy na dół poza containerem i dac zeby były na srodku
+    - wymiary guzików do change resolution i show img
 -->
 
 <!DOCTYPE HTML>
@@ -77,10 +75,30 @@
         <output id="value2Output"> 0 </output><br /><br />
         
         <input type="button" id="makePng" value="Show as image" onclick="showAsPng()" />
-        <input type="button" id="changeResolution" value="change resolution" onclick="changeResolution()" /><br /><br />
+        <input type="button" id="changeResolution" value="change resolution" onclick="showResolutionDiv()" /><br /><br />
         
         <input type="button" id="drawNewFractal" value="Change Fractal" onclick="drawNewFractalWithGif()"/> 
         <img src="img/ajax-loader.gif" id="loadingGif" /><br /><br />   
+        
+        <div id="resulutionContainer">
+            <p>Resolution </p><br />
+            <input type="radio" class="canvasResolution" name="canvasResolutionName" value="800,600" autocomplete="off" checked > 800 x 600 <br />
+            <input type="radio" class="canvasResolution" name="canvasResolutionName" value="1024,768" autocomplete="off"  > 1024 x 768 <br />
+            <input type="radio" class="canvasResolution" name="canvasResolutionName" value="1280,600" autocomplete="off"  > 1280 x 600 <br />
+            <input type="radio" class="canvasResolution" name="canvasResolutionName" value="1280,720" autocomplete="off"  > 1280 x 720 <br />
+            <input type="radio" class="canvasResolution" name="canvasResolutionName" value="1280,768" autocomplete="off"  > 1280 x 768 <br />
+            <input type="radio" class="canvasResolution" name="canvasResolutionName" value="1280,800" autocomplete="off"  > 1280 x 800 <br />
+            <input type="radio" class="canvasResolution" name="canvasResolutionName" value="1280,960" autocomplete="off"  > 1280 x 960 <br />
+            <input type="radio" class="canvasResolution" name="canvasResolutionName" value="1280,1024" autocomplete="off"  > 1280 x 1024 <br />
+            <input type="radio" class="canvasResolution" name="canvasResolutionName" value="1400,1050" autocomplete="off"  > 1400 x 1050 <br />
+            <input type="radio" class="canvasResolution" name="canvasResolutionName" value="1440,900" autocomplete="off"  > 1440 x 900 <br />
+            <input type="radio" class="canvasResolution" name="canvasResolutionName" value="1600,900" autocomplete="off"  > 1600 x 900 <br />
+            <input type="radio" class="canvasResolution" name="canvasResolutionName" value="1680,1050" autocomplete="off"  > 1680 x 1050 <br />
+            <input type="radio" class="canvasResolution" name="canvasResolutionName" value="1920,1080" autocomplete="off"  > 1920 x 1080 <br />
+            <br />
+            <input type="button" id="okResolution" value="OK" onclick="changeResolution()" />
+            <input type="button" id="anulujResolution" value="anuluj" onclick="hideResolutionDiv()" />
+        </div>
     </div>
     <div id="right-container">
         <canvas id="myCanvas" width="800" height="600"> </canvas>

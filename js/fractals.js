@@ -60,20 +60,43 @@ function showAsPng(){
     var newWindow = window.open(png);   
 }
 
+function showResolutionDiv() {
+    $("#resulutionContainer").show();    
+}
+
+function hideResolutionDiv(){
+    $("#resulutionContainer").hide();
+}
+
 function changeResolution(){
     // wybór jakie wymiary ( div pojawiajacy sie z radio inputami i guzikiem ok i anuluj )
     // wyczaic zaleźnosci z panX i zoom przy zmianie rezdzielczosci
+    var resolutionArray = getResolutionData();
     var canvasElement = $( "#myCanvas" );
-    canvasElement.attr("width", 1200);
-    canvasElement.attr("height", 800);   
-    canvasWidth = 1200;
-    canvasHeight = 800;
+    canvasElement.attr("width", resolutionArray[0]);
+    canvasElement.attr("height", resolutionArray[1]);   
+    canvasWidth = resolutionArray[0];
+    canvasHeight = resolutionArray[1];
     canvasData = canvasContent.getImageData( 0, 0, canvasWidth, canvasHeight );
-    offsetx = - canvasWidth / 2;
-    offsety = - canvasHeight / 2;
-    panX = -200;
-    zoom = 330;
-    drawNewFractalWithGif(); 
+    
+    $('canvas#myCanvas').appendTo($('body')); // moves canvas to body
+    
+    drawNewFractalWithGif();
+    pageScroll( canvasHeight ); 
+    hideResolutionDiv();
+    
+}
+
+function getResolutionData(){
+    var checkedResolution =  $('input[name="canvasResolutionName"]:checked').val();
+    var checkedResolutionArray = checkedResolution.split(",");
+    var checkedIntResolutionArray = checkedResolutionArray.map(function (x) { return parseInt(x);});
+    
+    return checkedIntResolutionArray;
+}
+
+function pageScroll( numbOfPixels ) {
+    $('body,html').animate({scrollTop: numbOfPixels}, 800); 
 }
 
 // Calculate the color of a specific pixel
