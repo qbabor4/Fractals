@@ -1,22 +1,17 @@
 $(document).ready(function(){
 
-    $(document).on("change", $("input[range][id='maxIterationsInput']"), function(){
+    $( "input[id='maxIterationsInput']" ).change( function(){
         // seting maxIterations value for fractals
         maxIterations = parseInt( maxIterationsOutput.value );
-        
     });
     
-    $(document).on("change", $("input[range][id='value1Input']"), function(){
+    $( "input[id='value1Input']" ).change( function(){
         value1Iter = parseFloat( value1Input.value );
-        console.log(value1Iter);
-        
     });
     
-    $(document).on("change", $("input[range][id='value2Input']"), function(){
+    $( "input[id='value2Input']" ).change( function(){
         // seting maxIterations value for fractals
-        value2Iter = parseFloat( value2Input.value );
-        console.log(value2Iter);
-        
+        value2Iter = parseFloat( value2Input.value );   
     });
     
     
