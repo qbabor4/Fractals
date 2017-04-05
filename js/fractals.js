@@ -79,8 +79,7 @@ function changeResolution(){
     canvasHeight = resolutionArray[1];
     canvasData = canvasContent.getImageData( 0, 0, canvasWidth, canvasHeight );
     
-    $('canvas#myCanvas').appendTo($('#biggercanvas')); // moves canvas to body
-    //$('canvas#myCanvas').css("margin", "auto");
+    $('canvas#myCanvas').appendTo($('#biggercanvas')); // moves canvas to #biggercanvas div
     
     drawNewFractalWithGif();
     pageScroll( canvasHeight ); 
@@ -179,7 +178,7 @@ function generatePalette() {
 function drawFractal( fractalName ){
     // draw pixels
     for (var i = 0; i < canvasHeight + 1; i++) {
-        for (var j = 0; j < canvasWidth + 1; j++){
+        for (var j = 0; j < canvasWidth + 1; j++){          
             var pixelColor = chooseFractal( j, i, fractalName );
             drawPixel( j, i, pixelColor.r, pixelColor.g, pixelColor.b, 255 ); 
         } 
@@ -247,8 +246,9 @@ function drawNewFractal() {
 }
 
 function drawNewFractalWithGif(){
-    // asynchronicznie zrobic z settimeout jakos (albo wątki normalnie)      
-    drawNewFractal();   
+    // asynchronicznie zrobic z settimeout jakos (albo wątki normalnie)
+    drawNewFractal();
+    
 }
 
 function chooseJulia(){
