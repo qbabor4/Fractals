@@ -45,6 +45,8 @@ canvas {
 }
 
 #drawNewFractal{
+    padding:0;
+    
     height: 40px;
     width: 300px;
     background: #fff;
@@ -69,5 +71,29 @@ canvas {
 
 #biggercanvas{
     text-align: center;
+}
+
+.greenDiv {
+  -webkit-animation: KEYFRAME-NAME 2s forwards;
+  -moz-animation:    KEYFRAME-NAME 2s forwards;
+  -o-animation:      KEYFRAME-NAME 2s forwards;
+  animation:         KEYFRAME-NAME 2s forwards;
+}
+
+@-webkit-keyframes KEYFRAME-NAME {
+  0%   { background: #fff; }
+  100% { background: #0f0; }
+}
+@-moz-keyframes KEYFRAME-NAME {
+  0%   { background: #fff; }
+  100% { background: #0f0; }
+}
+@-o-keyframes KEYFRAME-NAME {
+  0%   { background: #fff; }
+  100% { background: #0f0; }
+}
+@keyframes KEYFRAME-NAME {
+  0%   { background: #fff; }
+  100% { background: #0f0; }
 }
 

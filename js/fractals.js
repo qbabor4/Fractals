@@ -68,6 +68,14 @@ function hideResolutionDiv(){
     $("#resulutionContainer").hide();
 }
 
+function greenChageFractalButton(){
+    $("input[id=drawNewFractal]").addClass("greenDiv");
+}
+    
+function resetChangeFractalButton(){
+    $("input[id=drawNewFractal]").removeClass("greenDiv");
+}
+
 function changeResolution(){
     // wybór jakie wymiary ( div pojawiajacy sie z radio inputami i guzikiem ok i anuluj )
     // wyczaic zaleźnosci z panX i zoom przy zmianie rezdzielczosci
@@ -247,6 +255,7 @@ function drawNewFractal() {
 
 function drawNewFractalWithGif(){
     // asynchronicznie zrobic z settimeout jakos (albo wątki normalnie)
+    resetChangeFractalButton();
     drawNewFractal();
     
 }
