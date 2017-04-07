@@ -46,14 +46,16 @@ $(document).ready(function(){
         }
     });
     
-    function greenChageFractalButton(){
-        $("input[id=drawNewFractal]").addClass("greenDiv");
-        
-    }
     
-    function resetChangeFractalButton(){
-        $("input[id=drawNewFractal]").removeClass("greenDiv");
-    }
     
     
 });
+
+
+function greenChageFractalButton(){
+    $("input[id=drawNewFractal]").addClass("greenDiv");      
+}
+    
+function resetChangeFractalButton(){
+    $("input[id=drawNewFractal]").removeClass("greenDiv");
+}

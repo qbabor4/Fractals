@@ -94,11 +94,6 @@ function HSVtoRGB(H, S, V)
     };
 }
 
-function greenChageFractalButton(){
-        $("input[id=drawNewFractal]").addClass("greenDiv");
-        
-}
-
 function changePreviewDivColor(){
     greenChageFractalButton();
     rgbColors = HSVtoRGB(HSVhue, HSVsaturation, HSVvalue);

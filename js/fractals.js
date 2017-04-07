@@ -68,14 +68,6 @@ function hideResolutionDiv(){
     $("#resulutionContainer").hide();
 }
 
-function greenChageFractalButton(){
-    $("input[id=drawNewFractal]").addClass("greenDiv");
-}
-    
-function resetChangeFractalButton(){
-    $("input[id=drawNewFractal]").removeClass("greenDiv");
-}
-
 function changeResolution(){
     // wybór jakie wymiary ( div pojawiajacy sie z radio inputami i guzikiem ok i anuluj )
     // wyczaic zaleźnosci z panX i zoom przy zmianie rezdzielczosci
@@ -270,7 +262,8 @@ function chooseJulia(){
     setInuptOutputRangeParameters( value1Input, value1Output, 0.5, -1.2, 0.01, -0.7);
     setInuptOutputRangeParameters( value2Input, value2Output, 0.5, 0, 0.0005, 0.27);
     setMaxIterationsOnInputRange(30000);
-    drawFractal( fractalName );    
+    drawFractal( fractalName );
+    resetChangeFractalButton();   
 }
 
 function chooseMandelbrot(){    
@@ -285,6 +278,7 @@ function chooseMandelbrot(){
     setInuptOutputRangeParameters( value2Input, value2Output, 1.2, 0, 0.01, 0);
     setMaxIterationsOnInputRange(1000);
     drawFractal( fractalName );    
+    resetChangeFractalButton();
 }
 
 function setInuptOutputRangeParameters( inputId, outputId, max, min, step, value ){
@@ -308,8 +302,7 @@ function setMaxIterationsOnInputRange( numOfIterations ) {
      var input = $("#maxIterationsInput"); 
      input.attr("max", numOfIterations);
       
-     setValueOnMaxIterationsInputRange( 250 );
-     
+     setValueOnMaxIterationsInputRange( 250 );   
 }
 
 // change value on input visually and asign to variable

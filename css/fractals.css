@@ -3,6 +3,11 @@ body{
     color: #ddd;
 }
 
+br{
+    display:block;
+    margin:2px 0;
+}
+
 #container {
     margin:0 auto;
     width: 1200px;    
@@ -18,11 +23,14 @@ body{
     text-align: center;   
 }
 
-p {
+p{
     margin:0;
     padding:0;
 }
 
+input[type=range]{
+    width:250px;    
+}
 
 canvas {
     border: 1px solid #fff;    
@@ -30,6 +38,14 @@ canvas {
 
 #lol {   
     width:30px;
+}
+
+#makePng, #changeResolution{
+    background: #000;
+    color:#ddd;
+    width: 150px;  
+    height: 25px;
+    padding:0px;
 }
 
 #mandelbrot, #julia{
@@ -46,9 +62,8 @@ canvas {
 
 #drawNewFractal{
     padding:0;
-    
     height: 40px;
-    width: 300px;
+    width: 304px;
     background: #fff;
     color: #000; 
     font-size:20px;
@@ -82,18 +97,18 @@ canvas {
 
 @-webkit-keyframes KEYFRAME-NAME {
   0%   { background: #fff; }
-  100% { background: #0f0; }
+  100% { background: #0a0; }
 }
 @-moz-keyframes KEYFRAME-NAME {
   0%   { background: #fff; }
-  100% { background: #0f0; }
+  100% { background: #0a0; }
 }
 @-o-keyframes KEYFRAME-NAME {
   0%   { background: #fff; }
-  100% { background: #0f0; }
+  100% { background: #0a0; }
 }
 @keyframes KEYFRAME-NAME {
   0%   { background: #fff; }
-  100% { background: #0f0; }
+  100% { background: #0a0; }
 }
 
