@@ -33,7 +33,7 @@ $(document).ready(function(){
         // Zoom the fractal at the mouse position
         zoomFractal( pos.x, pos.y, zoomfactor, zoomin );        
         // Generate new image
-        drawFractal( fractalName );
+        drawNewFractalWithGif( );
     });
     
     $('input[name="colorPositionName"]').on("change", function(){
