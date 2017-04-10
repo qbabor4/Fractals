@@ -22,6 +22,14 @@
     - wymiary guzików do change resolution i show img
     - tam gdzie pixelColor dac worker, który zwróci obiekt ( dostac to z listenera )
     - wszystkie 2 petle dac do kodu wątka i zwrócć jakąś listę żeby nadpisać pixele canvasa
+    - generowanie palety w wątku
+    - dac palette[i] za ifami i zobaczyc jak kolory
+    - wywalic wybór fraktala w pętli (tak jak w wątku )
+    - updateCanvas jak jest wiekszy canvas freezuje stronę
+    - przepisac na wątek
+    - request animationframe na canvas???
+    - rodzielić na kilka wątków działanie ( każdy wątek oblicza swoje pixele )
+    - jak sie tworzy nowy fraktal zrobić gif z ładowaniem na środku z opacity 
 -->
 
 <!DOCTYPE HTML>
@@ -81,7 +89,7 @@
         <output id="value2Output"> 0 </output><br /><br />
         
         <input type="button" id="makePng" value="Show as image" onclick="showAsPng()" />
-        <input type="button" id="changeResolution" value="change resolution" onclick="showResolutionDiv()" /><br /><br />
+        <input type="button" id="changeResolution" value="Change resolution" onclick="showResolutionDiv()" /><br /><br />
         
         <input type="button" id="drawNewFractal" value="Change Fractal" onclick="drawNewFractalWithGif()"/>  
         <img src="img/ajax-loader.gif" id="loadingGif" /><br /><br />   
@@ -115,6 +123,7 @@
 
 <script src="js/jquery.js"></script>
 <script src="js/elementsAction.js"></script>
+<script src="js/fractalCount.js"></script>
 <script src="js/fractals.js"></script>
 <script src="js/hsvCircle.js"></script>
 

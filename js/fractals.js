@@ -8,15 +8,15 @@ var canvasHeight = canvas.height;
 var canvasData = canvasContent.getImageData( 0, 0, canvasWidth, canvasHeight );
 
 // Fractals variables
-var offsetx = - canvasWidth / 2;
-var offsety = - canvasHeight / 2;
+var offsetX = - canvasWidth / 2;
+var offsetY = - canvasHeight / 2;
 var panX = -100; // move to the right for better view // -100
 var panY = 0;
 var zoom = 250; //150
 
 // Maximum numbers of iterations while choosing color for pixel
-maxIterations = 255; // od 10 do 1000 mandel //od 10 do 5000 julia
-  
+var maxIterations = 255; // od 10 do 1000 mandel //od 10 do 5000 julia
+
 // Palette array of 256 colors in object {r,g,b}
 var palette = [];
 
@@ -40,20 +40,12 @@ var colorPositionOutside = true;
 value1Iter = 0;
 value2Iter = 0;
 
-//defines values od a pixel
-function drawPixel( x, y, r, g, b, a ) {
-    var index = ( x + y * canvasWidth ) * 4  ; // data in canvasData ia an array, not matrix
-    
-    canvasData.data[ index ] = r;
-    canvasData.data[ index + 1 ] = g;
-    canvasData.data[ index + 2 ] = b;
-    canvasData.data[ index + 3 ] = a;
-}
+//Number of threads to run
+var numOfThreads = 4;
 
-// updatae data of pixels, so modyfications are taken in consideration
-function updateCanvas() {
-    canvasContent.putImageData(canvasData, 0, 0);
-}
+//How many arrays function got from threads
+var gotThreads = 0;
+
 
 function showAsPng(){
     var png = canvas.toDataURL("image/png");
@@ -99,119 +91,22 @@ function pageScroll( numbOfPixels ) {
     $('body,html').animate({scrollTop: numbOfPixels}, 800); 
 }
 
-// Calculate the color of a specific pixel
-function calculateMandelbrotPixelColor(x, y, maxIterations) { //wywalic argumenty
-    // Convert the screen coordinate to a fractal coordinate
-    var x0 = ( x + offsetx + panX ) / zoom;
-    var y0 = ( y + offsety + panY ) / zoom;  
-       
-    // Iteration variables
-    var a = value1Iter; //0 // zmiana tego co 0.01 //1.7 max
-    var b = value2Iter; // 1.2 max co 0.01
-    var rx = 0;
-    var ry = 0;
-        
-    var iterations = 0;
-    while ( iterations < maxIterations && ( rx * rx + ry * ry <= 4 )) {
-        rx = a * a - b * b + x0;
-        ry = 2 * a * b + y0;
-            
-        a = rx;
-        b = ry;
-        iterations++;
-    }    
-    // Get palette color based on the number of iterations
-    var color;
-    if ( iterations == maxIterations ) { 
-        color = { r: rInside, g: gInside, b: bInside }; 
-    } else {
-        var index = Math.floor(( iterations / ( maxIterations-1)) * 255);
-        color = palette[ index ];
-    }    
-    return color;
-}
-// zmiana zmiannych jak zmiana na inpucie
-
-function calculateJulia( x, y, maxIterations ){
-    
-    var cX = value1Iter;  //-0.7 // -1.2 do 0.5 co 0.01
-    var cY = value2Iter; //0.27015 // 28025 spoko  // od 0 do 0.5 co 0.0005 
- 
-    var zx = ( x + offsetx + panX ) / zoom;
-    var zy = ( y + offsety + panY ) / zoom; 
-    
-	var iterations = 0; 
-	while (( zx * zx + zy * zy < 4 ) && ( iterations < maxIterations )){ 
-		 var temp = zx * zx - zy * zy + cX;
-		 zy = 2.0 * zx * zy + cY;
-         zx = temp;
-		 iterations += 1;
-    }
-    
-    // TODO: dac do funkcji (pobiera iterations)
-    if ( iterations == maxIterations ) {
-        var color = { r: rInside , g: gInside, b: bInside }; // Black 
-    } else {
-        var index = Math.floor(( iterations / ( maxIterations - 1 )) * 255);
-        color = palette[ index ];
-    }  
-    //
-    return color;             
-}
-
-
-// Calculate and generate colors palette
-function generatePalette() {
-    for ( var i = 0; i < 256; i++ ) {
-        palette[ i ] = { r: roffset, g: goffset, b: boffset};    
-        if ( i < 85 ) {
-            roffset += 3;
-        } else if ( i < 170 ) {
-            goffset += 3;
-        } else if ( i < 256 ) {
-            boffset += 3;
-        }
-    }
-}
-
-// change color of all pixels in order to create fractal
-function drawFractal( fractalName ){
-    // draw pixels
-    for (var i = 0; i < canvasHeight + 1; i++) {
-        for (var j = 0; j < canvasWidth + 1; j++){          
-            var pixelColor = chooseFractal( j, i, fractalName );
-            drawPixel( j, i, pixelColor.r, pixelColor.g, pixelColor.b, 255 ); 
-        } 
-    }
-    updateCanvas();
-}
-
-function chooseFractal( x, y, fractalName ){
-    if ( fractalName == "mandelbrot" ){
-        var color = calculateMandelbrotPixelColor( x, y, maxIterations ); 
-    } else if ( fractalName == "julia" ){
-        var color = calculateJulia( x, y, maxIterations );
-    }
-    return color;
-}
-
-
 // Zoom the fractal
 function zoomFractal(x, y, factor, zoomin) {
     if ( zoomin ) {
         // Zoom in
         zoom *= factor;
-        panX = factor * ( x + offsetx + panX );
-        panY = factor * ( y + offsety + panY );
+        panX = factor * ( x + offsetX + panX );
+        panY = factor * ( y + offsetY + panY );
     } else {
     // Zoom out
         zoom /= factor;
-        panX = ( x + offsetx + panX ) / factor;
-        panY = ( y + offsety + panY ) / factor;
+        panX = ( x + offsetX + panX ) / factor;
+        panY = ( y + offsetY + panY ) / factor;
     }
 }
     
-// Get the mouse position
+// Get the mouse position on canvas
 function getMousePos( canvas, e ) {
     var rect = canvas.getBoundingClientRect(); 
     return {
@@ -229,27 +124,9 @@ function changeOutsideColorsValue() {
 
 function changeInsideColorsValue(){
     rgbColors = HSVtoRGB(HSVhue, HSVsaturation, HSVvalue);
-    rInside = rgbColors.r ; 
+    rInside = rgbColors.r; 
     gInside = rgbColors.g;
-    bInside = rgbColors.b ;
-}
-
-function drawNewFractal() {
-    if (colorPositionOutside){
-        changeOutsideColorsValue();
-        generatePalette();
-    }
-    else{
-        changeInsideColorsValue();
-    }
-    drawFractal( fractalName );
-}
-
-function drawNewFractalWithGif(){
-    // asynchronicznie zrobic z settimeout jakos (albo wątki normalnie)
-    resetChangeFractalButton();
-    drawNewFractal();
-    
+    bInside = rgbColors.b;
 }
 
 function chooseJulia(){
@@ -273,7 +150,6 @@ function chooseMandelbrot(){
     zoom = 250;
     value1Iter = 0;
     value2Iter = 0;
-    console.log(value1Input);
     setInuptOutputRangeParameters( value1Input, value1Output, 1.7, 0, 0.01, 0);
     setInuptOutputRangeParameters( value2Input, value2Output, 1.2, 0, 0.01, 0);
     setMaxIterationsOnInputRange(1000);
@@ -317,14 +193,12 @@ function setValueOnMaxIterationsInputRange( numOfIterations ){
 
 
 function main(tframe){
-    // Request animation frames // nie wiem po co
-    //window.requestAnimationFrame(main);
     generatePalette();
 }
 
 function init(){    
     main(0);
-    drawFractal( fractalName );    
+    drawNewFractalWithGif();   
 }
 
 $(document).ready(function(){    
