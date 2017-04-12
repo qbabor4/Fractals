@@ -57,10 +57,6 @@ canvas {
     margin: 0 20px 20px 0;
 }
 
-#loadingGif {
-    visibility:hidden;
-}
-
 #drawNewFractal{
     padding:0;
     height: 40px;
@@ -132,4 +128,10 @@ canvas {
 	display:none;
 }
 
+#copyrights{
+	position:fixed;
+	bottom:0;
+	right:0;
+	width:200px;
+}
 

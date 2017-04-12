@@ -1,56 +1,19 @@
-<!-- TODO:
-	-http://usefuljs.net/fractals/ (wiecej fraktali)
-    - Request animation frames
-    window.requestAnimationFrame(main);
-    - canvas w internet explorer nie działą
-    - dopisek przy zmianie maxymalnej wartosci ze jak duzo to bedzie wolniej 
-    - cofanie oddalenia guzikiem (czy jakos) zeby na mobilnych było łatwo
-    - zmiana rozdzielczosci dla pokazywanego zdjecia
-    - zmiana kloru guzika do rysowania nowego fraktala po zmianie iteracji czy koloru
-    - ikonka czekania przy ładowaniu fraktala
-    - web workers 
-    - PUSCIC LICZNIE FRAKTALA NA WATKU!!!!!!
-    - watek dla iteracji i dla rysowania pixeli
-    - fixed fraktal na srodku z czarnym tłem dokokoła i krzyzykiem do zamkniecia
-    - jak pierwszy raz ktos przychodzi ( ciasteczka ), to wyswietla sie instrukcja jak uzywac
-    - kolko hsv moze nie dzialac przy responsywnych stronach ( zmiana lokacji zdjecia kolka nie zmiania zmiennych )
-    - guzik cos robi po zmianieniu koloru czy innych rzeczy zeby nacisnąć
-    - jak sie zapisze zdjecie a potem z zakładek wejdzie, to ucina spód ( adres jest długo to moze ucina )( pokazac zdj jako stronę ) 
-    - jak wyjedzie sie poza koło z nacisnietym lewym przyciskiem myszy, to potem jak sie wraca, to kolory sie same zmianiają( bez nacisniecia przycisku)
-    -^ bool clicked sie nie zmiania jak puscimy poza divem (np. zmiana clicked na false jak sie opuści koło )(albo jak ogólnie puści to tez zmiana)
-    - tworzenie zdjecia na wątku
-    - wymiary guzików do change resolution i show img
-    - tam gdzie pixelColor dac worker, który zwróci obiekt ( dostac to z listenera )
-    - wszystkie 2 petle dac do kodu wątka i zwrócć jakąś listę żeby nadpisać pixele canvasa
-    - generowanie palety w wątku
-    - dac palette[i] za ifami i zobaczyc jak kolory
-    - wywalic wybór fraktala w pętli (tak jak w wątku )
-    - updateCanvas jak jest wiekszy canvas freezuje stronę
-    - przepisac na wątek
-    - request animationframe na canvas???
-    - rodzielić na kilka wątków działanie ( każdy wątek oblicza swoje pixele )
-    - jak sie tworzy nowy fraktal zrobić gif z ładowaniem na środku z opacity 
--->
-
 <!DOCTYPE HTML>
-
 <head>
 	<meta http-equiv="content-type" content="text/html" />
-	<meta name="Jakub Borówka" content="Fractals" />
+	<meta name="Jakub Borówka" content="Fractal genertor" />
     <meta charset="utf-8" />
     <link rel="Shortcut icon" href="img/icon.ico" />
-	<meta name="Keywords" content="fractal, generator, mandelbrot, julia, custom, geometrical, maker, builder" />
+	<meta name="Keywords" content="fractal, generator, mandelbrot, julia, custom, geometrical, maker, builder, zoom, colors, circle, color" />
     
     <link rel="stylesheet" type="text/css" href="css/fractals.css" />
     <link rel="stylesheet" type="text/css" href="css/hsvCircle.css" />
     <link rel="stylesheet" type="text/css" href="css/loadingAnimation.css" />
 
 	<title>Fractals Generator</title>
-
 </head>
 
 <body>
-
 <div id="container">
     <div id="left-container">
     
@@ -92,8 +55,7 @@
         <input type="button" id="makePng" value="Show as image" onclick="showAsPng()" />
         <input type="button" id="changeResolution" value="Change resolution" onclick="showResolutionDiv()" /><br /><br />
         
-        <input type="button" id="drawNewFractal" value="Change Fractal" onclick="drawNewFractalWithGif()"/>  
-        <img src="img/ajax-loader.gif" id="loadingGif" /><br /><br />   
+        <input type="button" id="drawNewFractal" value="Change Fractal" onclick="drawNewFractalWithGif()"/>     
         
         <div id="resulutionContainer">
             <p>Resolution </p><br />
@@ -121,7 +83,7 @@
 	<div id="inlineDiv">
 		<canvas id="myCanvas" width="800" height="600"> </canvas>
 		<div id="blackFilterAnimation">
-													<div class="sk-cube-grid">
+			<div class="sk-cube-grid">
 			<div class="sk-cube sk-cube1"></div>
 			<div class="sk-cube sk-cube2"></div>
 			<div class="sk-cube sk-cube3"></div>
@@ -136,8 +98,12 @@
 	</div>
 </div>
 
-
-
+<div id="copyrights"
+	<footer>
+		<small>&copy; Copyright 2017, Jakub Borówka</small> <br />
+		<small>Contact information: qbabor4444@gmail.com </small>
+	</footer> 
+</div>
 <script src="js/jquery.js"></script>
 <script src="js/elementsAction.js"></script>
 <script src="js/fractalCount.js"></script>

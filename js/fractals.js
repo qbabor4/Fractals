@@ -1,11 +1,19 @@
+/*TODO:
+	-http://usefuljs.net/fractals/ (wiecej fraktali)
+    - canvas w internet explorer nie działą
+    - dopisek przy zmianie maxymalnej wartosci ze jak duzo to bedzie wolniej 
+    - jak pierwszy raz ktos przychodzi ( ciasteczka ), to wyswietla sie instrukcja jak uzywac
+    - jak sie zapisze zdjecie a potem z zakładek wejdzie, to ucina spód ( adres jest długo to moze ucina )( pokazac zdj jako stronę ) 
+*/
+
 // Fractals generator
 
 // Canvas variables
 var canvas = $( "#myCanvas" )[ 0 ] //gets jquery object (not canvas element) without [0]
-var canvasContent = canvas.getContext( "2d" );
+var canvasContext = canvas.getContext( "2d" );
 var canvasWidth = canvas.width;
 var canvasHeight = canvas.height;
-var canvasData = canvasContent.getImageData( 0, 0, canvasWidth, canvasHeight );
+var canvasData = canvasContext.getImageData( 0, 0, canvasWidth, canvasHeight ); 
 
 // Fractals variables
 var offsetX = - canvasWidth / 2;
@@ -46,28 +54,33 @@ var numOfThreads = 4;
 //How many arrays function got from threads
 var gotThreads = 0;
 
-
+// shows canvas picture as image in different tab
 function showAsPng(){
     var png = canvas.toDataURL("image/png");
     var newWindow = window.open(png);   
 }
 
+// shows available resolutions to pick
 function showResolutionDiv() {
     $("#resulutionContainer").show();    
 }
 
+// hides resolution div
 function hideResolutionDiv(){
     $("#resulutionContainer").hide();
 }
 
+// shows loading animation (while calculating canvas)
 function showLoadingAnimation(){
 	$("#blackFilterAnimation").show();
 }
 
+// hides -||-
 function hideLoadingAniamtion(){
 	$("#blackFilterAnimation").hide();
 }
 
+// changes resolution of canvas
 function changeResolution(){
     // wybór jakie wymiary ( div pojawiajacy sie z radio inputami i guzikiem ok i anuluj )
     // wyczaic zaleźnosci z panX i zoom przy zmianie rezdzielczosci
@@ -77,7 +90,7 @@ function changeResolution(){
     canvasElement.attr("height", resolutionArray[1]);   
     canvasWidth = resolutionArray[0];
     canvasHeight = resolutionArray[1];
-    canvasData = canvasContent.getImageData( 0, 0, canvasWidth, canvasHeight );
+    canvasData = canvasContext.getImageData( 0, 0, canvasWidth, canvasHeight );
     
     setAnimationPosition();
     
@@ -87,6 +100,7 @@ function changeResolution(){
     
 }
 
+// returns resolution data in array for egsample [800,600]
 function getResolutionData(){
     var checkedResolution =  $('input[name="canvasResolutionName"]:checked').val();
     var checkedResolutionArray = checkedResolution.split(",");
@@ -95,6 +109,7 @@ function getResolutionData(){
     return checkedIntResolutionArray;
 }
 
+// scrolling page to view fractal
 function pageScroll( numbOfPixels ) {
     $('body,html').animate({scrollTop: numbOfPixels}, 800); 
 }
@@ -123,6 +138,7 @@ function getMousePos( canvas, e ) {
     };
 }
 
+// changes color variables that defines outside colors of fractal
 function changeOutsideColorsValue() { 
     rgbColors = HSVtoRGB(HSVhue, HSVsaturation, HSVvalue);
     roffset =  rgbColors.r ; 
@@ -130,6 +146,7 @@ function changeOutsideColorsValue() {
     boffset =  rgbColors.b ;
 }
 
+// changes color variables that defines inside colors of fractal
 function changeInsideColorsValue(){
     rgbColors = HSVtoRGB(HSVhue, HSVsaturation, HSVvalue);
     rInside = rgbColors.r; 
@@ -137,6 +154,7 @@ function changeInsideColorsValue(){
     bInside = rgbColors.b;
 }
 
+// sets variables to show new julia fractal on canvas
 function chooseJulia(){
     fractalName = "julia";
     panX = 0;
@@ -151,6 +169,7 @@ function chooseJulia(){
     resetChangeFractalButton();   
 }
 
+// sets variables to show new mandelbrot fractal on canvas
 function chooseMandelbrot(){    
     fractalName = "mandelbrot";
     panX = -100;
@@ -165,6 +184,7 @@ function chooseMandelbrot(){
     resetChangeFractalButton();
 }
 
+// changes input range atributs
 function setInuptOutputRangeParameters( inputId, outputId, max, min, step, value ){
     var input = $("#" + inputId.id ); 
     var output = $("#" +  outputId.id );
@@ -182,6 +202,7 @@ function setMaxIterations( numOfIterations ){
     maxIterations = numOfIterations;
 }
 
+// sets max iterations on input range
 function setMaxIterationsOnInputRange( numOfIterations ) {
      var input = $("#maxIterationsInput"); 
      input.attr("max", numOfIterations);
@@ -199,13 +220,12 @@ function setValueOnMaxIterationsInputRange( numOfIterations ){
      //console.log(input.attr("value"));
 }
 
-
+// draws new fractal with animation
 function drawNewFractalWithGif(){
 	showLoadingAnimation();
     resetChangeFractalButton();
     checkColorsPositionAndDrawNewFractal();
 }
-
 
 function main(tframe){
     generatePalette();

@@ -33,6 +33,7 @@ function calculateMandelbrotPixelColor( x, y ) {
     return getColorFromIterations( iterations );
 }
 
+// Calculate the color of a specific pixel
 function calculateJuliaPixelColor( x, y ){
     var cX = value1Iter;  //-0.7 // -1.2 do 0.5 co 0.01
     var cY = value2Iter; //0.27015 // 28025 spoko  // od 0 do 0.5 co 0.0005 
@@ -63,14 +64,13 @@ function getColorFromIterations( iterations ){
     return color;  
 }
 
+// chooses fractal and calculates new fractal
 function chooseFractalAndCalculate( ){
-    var color;
     if (  fractalName == "mandelbrot" ){
-        color = calculateColorsForMandelbrotPixels();
+        calculateColorsForMandelbrotPixels(); //color = 
     } else if ( fractalName == "julia" ){
-        color = calculateColorsForJuliaPixels();
+        calculateColorsForJuliaPixels();
     }
-    return color;
 }
 
 // change color of all pixels in order to create fractal
@@ -85,6 +85,7 @@ function calculateColorsForMandelbrotPixels(){
     updateCanvas();
 }
 
+//calculates colors for pixels and update
 function calculateColorsForJuliaPixels(){
     // draw pixels
     for (var i = 0; i < canvasHeight + 1; i++) {
@@ -97,9 +98,8 @@ function calculateColorsForJuliaPixels(){
 }
 
 // updatae data of pixels, so modyfications are taken in consideration
-//TODO: find faster way ( to not freeze )
 function updateCanvas() {
-	canvasContent.putImageData(canvasData, 0, 0); 
+	canvasContext.putImageData(canvasData, 0, 0); 
     hideLoadingAniamtion();
 }
 
@@ -117,6 +117,7 @@ function generatePalette() {
     }
 }
 
+// sets data of canvas from each tread
 function changeCanvasData( e ){
 	gotThreads++;
 	var threadIndex = e.data[0]; 
@@ -134,6 +135,7 @@ function changeCanvasData( e ){
 	}
 }
 
+//draws fractal with workers or in normal way
 function drawFractal(){
     if(typeof(Worker) !== "undefined") {
 	    if ( typeof(w) == "undefined"){ 
@@ -156,7 +158,7 @@ function drawFractal(){
     
 }
 
-
+// check is color position is inside or outside gif
 function checkColorsPositionAndDrawNewFractal() {
     if (colorPositionOutside){
         changeOutsideColorsValue();
