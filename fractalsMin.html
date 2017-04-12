@@ -1,0 +1,114 @@
+<!DOCTYPE HTML>
+<head>
+	<meta http-equiv="content-type" content="text/html" />
+	<meta name="Jakub Borówka" content="Fractal genertor" />
+    <meta charset="utf-8" />
+    <link rel="Shortcut icon" href="img/icon.ico" />
+	<meta name="Keywords" content="fractal, generator, mandelbrot, julia, custom, geometrical, maker, builder, zoom, colors, circle, color" />
+    
+    <link rel="stylesheet" type="text/css" href="css/fractals.css" />
+    <link rel="stylesheet" type="text/css" href="css/hsvCircle.css" />
+    <link rel="stylesheet" type="text/css" href="css/loadingAnimation.css" />
+
+	<title>Fractals Generator</title>
+</head>
+
+<body>
+<div id="container">
+    <div id="left-container">
+    
+        <p>Zoom in by clicking on the image of fractal</p>
+        <p>Clicking while holding CTRL - Zoom back</p>
+        <p>Clicking while holding SHIFT - Move to sides</p>
+        
+        <br />
+        <input type="button" id="mandelbrot" value="Mandlebrot" onclick="chooseMandelbrot()"/> 
+        <input type="button" id="julia" value="Julia set" onclick="chooseJulia()" />
+        <br />
+        
+        <input type="radio" class="colorPosition" name="colorPositionName" value="outside" autocomplete="off" checked > Outside Color 
+        <input type="radio" class="colorPosition" name="colorPositionName" value="inside" autocomplete="off" > Inside Color
+        <br /><br />
+        
+        <div id="hsvContainer">
+            <div id="hsvCircle"> </div>
+            <div id="blackFilter"> </div>
+            <div id="colorPreview"></div><br />
+        </div>
+        
+        Brightness : <br />
+        <input type="range" id="HSVvalueInput" min="0" max="1" step="0.01" autocomplete="off" value="1" oninput="HSVvalueOutput.value = HSVvalueInput.value" />
+        <output id="HSVvalueOutput"> 1 </output> <br />
+        
+        Number of Iterations: <br />
+        <input id="maxIterationsInput" type="range" autocomplete="off" max="1000" min="10" value="255" oninput="maxIterationsOutput.value = maxIterationsInput.value" /> 
+        <output id="maxIterationsOutput">255 </output><br />
+        
+        Value1: <br />
+        <input type="range" id="value1Input" autocomplete="off" max="1.7" min="0" step="0.01" value="0" oninput="value1Output.value = value1Input.value" />
+        <output id="value1Output"> 0 </output><br />
+        
+        Value2: <br />
+        <input type="range" id="value2Input" autocomplete="off" max="1.2" min="0" step="0.01" value="0" oninput="value2Output.value = value2Input.value" />
+        <output id="value2Output"> 0 </output><br /><br />
+        
+        <input type="button" id="makePng" value="Show as image" onclick="showAsPng()" />
+        <input type="button" id="changeResolution" value="Change resolution" onclick="showResolutionDiv()" /><br /><br />
+        
+        <input type="button" id="drawNewFractal" value="Change Fractal" onclick="drawNewFractalWithGif()"/>     
+        
+        <div id="resulutionContainer">
+            <p>Resolution </p><br />
+            <input type="radio" class="canvasResolution" name="canvasResolutionName" value="800,600" autocomplete="off" checked > 800 x 600 <br />
+            <input type="radio" class="canvasResolution" name="canvasResolutionName" value="1024,768" autocomplete="off"  > 1024 x 768 <br />
+            <input type="radio" class="canvasResolution" name="canvasResolutionName" value="1280,600" autocomplete="off"  > 1280 x 600 <br />
+            <input type="radio" class="canvasResolution" name="canvasResolutionName" value="1280,720" autocomplete="off"  > 1280 x 720 <br />
+            <input type="radio" class="canvasResolution" name="canvasResolutionName" value="1280,768" autocomplete="off"  > 1280 x 768 <br />
+            <input type="radio" class="canvasResolution" name="canvasResolutionName" value="1280,800" autocomplete="off"  > 1280 x 800 <br />
+            <input type="radio" class="canvasResolution" name="canvasResolutionName" value="1280,960" autocomplete="off"  > 1280 x 960 <br />
+            <input type="radio" class="canvasResolution" name="canvasResolutionName" value="1280,1024" autocomplete="off"  > 1280 x 1024 <br />
+            <input type="radio" class="canvasResolution" name="canvasResolutionName" value="1400,1050" autocomplete="off"  > 1400 x 1050 <br />
+            <input type="radio" class="canvasResolution" name="canvasResolutionName" value="1440,900" autocomplete="off"  > 1440 x 900 <br />
+            <input type="radio" class="canvasResolution" name="canvasResolutionName" value="1600,900" autocomplete="off"  > 1600 x 900 <br />
+            <input type="radio" class="canvasResolution" name="canvasResolutionName" value="1680,1050" autocomplete="off"  > 1680 x 1050 <br />
+            <input type="radio" class="canvasResolution" name="canvasResolutionName" value="1920,1080" autocomplete="off"  > 1920 x 1080 <br />
+            <br />
+            <input type="button" id="okResolution" value="OK" onclick="changeResolution()" />
+            <input type="button" id="anulujResolution" value="anuluj" onclick="hideResolutionDiv()" />
+        </div>
+    </div>
+</div>
+
+<div id="canvasContainer">
+	<div id="inlineDiv">
+		<canvas id="myCanvas" width="800" height="600"> </canvas>
+		<div id="blackFilterAnimation">
+			<div class="sk-cube-grid">
+			<div class="sk-cube sk-cube1"></div>
+			<div class="sk-cube sk-cube2"></div>
+			<div class="sk-cube sk-cube3"></div>
+			<div class="sk-cube sk-cube4"></div>
+			<div class="sk-cube sk-cube5"></div>
+			<div class="sk-cube sk-cube6"></div>
+			<div class="sk-cube sk-cube7"></div>
+			<div class="sk-cube sk-cube8"></div>
+			<div class="sk-cube sk-cube9"></div>
+		</div>
+		</div>
+	</div>
+</div>
+
+<div id="copyrights"
+	<footer>
+		<small>&copy; Copyright 2017, Jakub Borówka</small> <br />
+		<small>Contact information: qbabor4444@gmail.com </small>
+	</footer> 
+</div>
+<script src="js/jquery.js"></script>
+<script src="js/elementsActionMin.js"></script>
+<script src="js/fractalCountMin.js"></script>
+<script src="js/fractalsMin.js"></script>
+<script src="js/hsvCircleMin.js"></script>
+
+</body>
+</html>

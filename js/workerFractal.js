@@ -1,4 +1,4 @@
-var canvasData = []; // to return // sprawdzic wielość tablicy w kilku miejscach
+var canvasData = []; // to return 
 var palette;
 var canvasHeight;
 var canvasWidth;
@@ -46,7 +46,7 @@ function setVariables( e ){
 }
 
 function calculateCanvasData(){
-    chooseFractalAndCalculate( fractalName ); //TODO: zobaczy czy da sie bez parametru
+    chooseFractalAndCalculate(); 
 }
 
 // counts pixels only for part of data 
@@ -72,16 +72,15 @@ function calculateColorsForJuliaPixels(){ // zamienic zmienne tak jak w mandelbr
     }
 }
 
-function  chooseFractalAndCalculate( fractalName ){
-    var color;
+function  chooseFractalAndCalculate(){
     if ( fractalName == "mandelbrot" ){
-        color = calculateColorsForMandelbrotPixels();
+        calculateColorsForMandelbrotPixels();
     } else if ( fractalName == "julia" ){
-        color = calculateColorsForJuliaPixels();
+        calculateColorsForJuliaPixels();
     }
-    return color;
 }
 
+// sets pixel data in canvasData
 function setPixelData( x, y, r, g, b, a ) {
     var pixelIndex = ( x + y * canvasWidth ) * 4  ; // data in canvasData ia an array, not matrix
     canvasData[ pixelIndex ] = r;
@@ -142,7 +141,6 @@ function getColorFromIterations( iterations ){
         var index = Math.floor(( iterations / ( maxIterations-1)) * 255);
         color = palette[ index ];
     }    
-    return color;
-    
+    return color; 
 }
 
