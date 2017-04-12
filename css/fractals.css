@@ -120,8 +120,7 @@ canvas {
 
 #inlineDiv{
 	display: inline-block;
-	position:relative;
-	
+	position:relative;	
 }
 
 #blackFilterAnimation{
@@ -130,8 +129,6 @@ canvas {
 	height:100%;
 	top:0;
 	left:0;
-	background: rgba(0,0,0,0.2);
-	/*opacity:0.2; */
 	display:none;
 }
 
