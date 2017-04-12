@@ -12,10 +12,10 @@ var offsetX = - canvasWidth / 2;
 var offsetY = - canvasHeight / 2;
 var panX = -100; // move to the right for better view // -100
 var panY = 0;
-var zoom = 250; //150
+var zoom = 250; 
 
 // Maximum numbers of iterations while choosing color for pixel
-var maxIterations = 255; // od 10 do 1000 mandel //od 10 do 5000 julia
+var maxIterations = 255; 
 
 // Palette array of 256 colors in object {r,g,b}
 var palette = [];
@@ -146,7 +146,7 @@ function chooseJulia(){
     value2Iter = 0.27;
     setInuptOutputRangeParameters( value1Input, value1Output, 0.5, -1.2, 0.01, -0.7);
     setInuptOutputRangeParameters( value2Input, value2Output, 0.5, 0, 0.0005, 0.27);
-    setMaxIterationsOnInputRange(30000);
+    setMaxIterationsOnInputRange(5000);
     drawNewFractalWithGif();
     resetChangeFractalButton();   
 }

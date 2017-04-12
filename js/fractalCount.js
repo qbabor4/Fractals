@@ -99,7 +99,7 @@ function calculateColorsForJuliaPixels(){
 // updatae data of pixels, so modyfications are taken in consideration
 //TODO: find faster way ( to not freeze )
 function updateCanvas() {
-    canvasContent.putImageData(canvasData, 0, 0); 
+	canvasContent.putImageData(canvasData, 0, 0); 
     hideLoadingAniamtion();
 }
 
