@@ -1,5 +1,6 @@
 #hsvCircleImage {
-    margin: 30px;   
+    margin: 30px;  
+    overflow: visible; 
 }
 
 #colorPreview{
@@ -23,7 +24,6 @@
 }
 
 #hsvCircle, #blackFilter {
-    position: absolute;
     top:0;
     left:0;
     width:302px;
@@ -31,9 +31,12 @@
 }
 
 #blackFilter{
+	position: absolute;
     background: #000;
-    /*width: 305px;
-    height: 305px;*/
+    width: 306px;
+    height: 306px;
+    top:-2px;
+    left: -2px;
     opacity: 0;
     z-index:10;
     border-radius: 50%;
@@ -42,5 +45,4 @@
 
 #hsvCircle{
     background: url("../img/hsvCircleFit.png");
-    opacity: 1;
 }
