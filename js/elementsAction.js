@@ -33,7 +33,8 @@ $(document).ready(function(){
         // Zoom the fractal at the mouse position
         zoomFractal( pos.x, pos.y, zoomfactor, zoomin );        
         // Generate new image
-        drawFractal( fractalName );
+        drawNewFractalWithGif();
+        //drawFractal( fractalName );
     });
     
     $('input[name="colorPositionName"]').on("change", function(){
@@ -46,11 +47,16 @@ $(document).ready(function(){
         }
     });
     
-    
-    
+    setAnimationPosition();
     
 });
 
+function setAnimationPosition(){
+	var leftMove = canvasWidth/2 -20+"px"; //Aniamtion is 40X40px
+    var topMove = canvasHeight/2 -20+"px";
+    // zmieniać wielkość animacji
+    $(".sk-cube-grid").css({"top": topMove, "left": leftMove});
+}
 
 function greenChageFractalButton(){
     $("input[id=drawNewFractal]").addClass("greenDiv");      

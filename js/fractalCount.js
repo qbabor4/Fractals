@@ -100,6 +100,7 @@ function calculateColorsForJuliaPixels(){
 //TODO: find faster way ( to not freeze )
 function updateCanvas() {
     canvasContent.putImageData(canvasData, 0, 0); 
+    hideLoadingAniamtion();
 }
 
 // Calculate and generate colors palette
@@ -114,13 +115,6 @@ function generatePalette() {
             boffset += 3;
         }
     }
-}
-
-function drawNewFractalWithGif(){
-	// poczatek gifu z ładowaniem
-    resetChangeFractalButton();
-    checkColorsPositionAndDrawNewFractal();
-    // TODO: tu koniec gifu z ładowaniem nad canvasem
 }
 
 function changeCanvasData( e ){

@@ -15,6 +15,7 @@ br{
 
 #left-container{
     float:left;
+    width: 350px;
 }
 
 #right-container{
@@ -111,4 +112,27 @@ canvas {
   0%   { background: #fff; }
   100% { background: #0a0; }
 }
+
+#canvasContainer{
+	
+	text-align: center; 
+}
+
+#inlineDiv{
+	display: inline-block;
+	position:relative;
+	
+}
+
+#blackFilterAnimation{
+	position: absolute; 
+	width:100%; 
+	height:100%;
+	top:0;
+	left:0;
+	background: rgba(0,0,0,0.2);
+	/*opacity:0.2; */
+	display:none;
+}
+
 

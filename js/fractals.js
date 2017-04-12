@@ -60,6 +60,14 @@ function hideResolutionDiv(){
     $("#resulutionContainer").hide();
 }
 
+function showLoadingAnimation(){
+	$("#blackFilterAnimation").show();
+}
+
+function hideLoadingAniamtion(){
+	$("#blackFilterAnimation").hide();
+}
+
 function changeResolution(){
     // wybór jakie wymiary ( div pojawiajacy sie z radio inputami i guzikiem ok i anuluj )
     // wyczaic zaleźnosci z panX i zoom przy zmianie rezdzielczosci
@@ -71,7 +79,7 @@ function changeResolution(){
     canvasHeight = resolutionArray[1];
     canvasData = canvasContent.getImageData( 0, 0, canvasWidth, canvasHeight );
     
-    $('canvas#myCanvas').appendTo($('#biggercanvas')); // moves canvas to #biggercanvas div
+    setAnimationPosition();
     
     drawNewFractalWithGif();
     pageScroll( canvasHeight ); 
@@ -139,7 +147,7 @@ function chooseJulia(){
     setInuptOutputRangeParameters( value1Input, value1Output, 0.5, -1.2, 0.01, -0.7);
     setInuptOutputRangeParameters( value2Input, value2Output, 0.5, 0, 0.0005, 0.27);
     setMaxIterationsOnInputRange(30000);
-    drawFractal( fractalName );
+    drawNewFractalWithGif();
     resetChangeFractalButton();   
 }
 
@@ -152,8 +160,8 @@ function chooseMandelbrot(){
     value2Iter = 0;
     setInuptOutputRangeParameters( value1Input, value1Output, 1.7, 0, 0.01, 0);
     setInuptOutputRangeParameters( value2Input, value2Output, 1.2, 0, 0.01, 0);
-    setMaxIterationsOnInputRange(1000);
-    drawFractal( fractalName );    
+    setMaxIterationsOnInputRange(1000); 
+    drawNewFractalWithGif();
     resetChangeFractalButton();
 }
 
@@ -189,6 +197,13 @@ function setValueOnMaxIterationsInputRange( numOfIterations ){
      maxIterationsInput.value = maxIterations;
      maxIterationsOutput.value = maxIterations;
      //console.log(input.attr("value"));
+}
+
+
+function drawNewFractalWithGif(){
+	showLoadingAnimation();
+    resetChangeFractalButton();
+    checkColorsPositionAndDrawNewFractal();
 }
 
 
