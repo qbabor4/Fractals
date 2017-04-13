@@ -4,6 +4,8 @@
     - dopisek przy zmianie maxymalnej wartosci ze jak duzo to bedzie wolniej 
     - jak pierwszy raz ktos przychodzi ( ciasteczka ), to wyswietla sie instrukcja jak uzywac
     - jak sie zapisze zdjecie a potem z zakładek wejdzie, to ucina spód ( adres jest długo to moze ucina )( pokazac zdj jako stronę ) 
+	- pokazywac zdjecia tak jak gdy sie klika prawym przyciskiem myszy
+	- jak sie przesuwa (albo zoomuje) to zumuje źle (jak dla 800X600 chyba)
 */
 
 // Fractals generator
@@ -18,7 +20,7 @@ var canvasData = canvasContext.getImageData( 0, 0, canvasWidth, canvasHeight );
 // Fractals variables
 var offsetX = - canvasWidth / 2;
 var offsetY = - canvasHeight / 2;
-var panX = -100; // move to the right for better view // -100
+var panX = 0; // move to the right for better view // -100
 var panY = 0;
 var zoom = 250; 
 
@@ -56,8 +58,8 @@ var gotThreads = 0;
 
 // shows canvas picture as image in different tab
 function showAsPng(){
-    var png = canvas.toDataURL("image/png");
-    var newWindow = window.open(png);   
+	var png = canvas.toDataURL("image/png");
+	var newWindow = window.open(png); 
 }
 
 // shows available resolutions to pick
@@ -90,6 +92,8 @@ function changeResolution(){
     canvasElement.attr("height", resolutionArray[1]);   
     canvasWidth = resolutionArray[0];
     canvasHeight = resolutionArray[1];
+    offsetX = - canvasWidth / 2;
+	offsetY = - canvasHeight / 2;
     canvasData = canvasContext.getImageData( 0, 0, canvasWidth, canvasHeight );
     
     setAnimationPosition();
@@ -121,19 +125,21 @@ function zoomFractal(x, y, factor, zoomin) {
         zoom *= factor;
         panX = factor * ( x + offsetX + panX );
         panY = factor * ( y + offsetY + panY );
+       
     } else {
     // Zoom out
         zoom /= factor;
         panX = ( x + offsetX + panX ) / factor;
         panY = ( y + offsetY + panY ) / factor;
     }
+    console.log(panX, panY);
 }
     
 // Get the mouse position on canvas
 function getMousePos( canvas, e ) {
     var rect = canvas.getBoundingClientRect(); 
     return {
-        x: Math.round(( e.clientX - rect.left )/( rect.right - rect.left ) * canvasWidth ), //zmienic na zmienną canvasWidth i height
+        x: Math.round(( e.clientX - rect.left )/( rect.right - rect.left ) * canvasWidth ), 
         y: Math.round(( e.clientY - rect.top )/( rect.bottom - rect.top ) * canvasHeight )
     };
 }

@@ -20,9 +20,11 @@ $(document).ready(function(){
     
     
     $( "canvas#myCanvas" ).on( 'mousedown', function(e) {
-    	// on left mouse button click draws new fractal zoomed
+    	// on left mouse button click draws new fractal zoomed or not
     	if (e.which == 1){
-	        var pos = getMousePos( canvas, e );      
+	        var pos = getMousePos( canvas, e );     
+	        console.log(pos);
+	        console.log(canvas); 
 	        // Zoom out with Control
 	        var zoomin = true;
 	        if ( e.ctrlKey ) {
