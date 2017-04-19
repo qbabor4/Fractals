@@ -13,7 +13,9 @@ Program uses threads when they are available in browser. That makes calculation 
 
 You can change Mandelbrot or Julia fractal. 
 
-You can change resolution, to make fractal picture bigger and then
+You can change resolution, to make fractal picture bigger and then show it as png picture.
+
+Javascript uses JQuery framework.
 
 
 
