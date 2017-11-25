@@ -15,7 +15,7 @@ You can change Mandelbrot or Julia fractal.
 
 You can change resolution, to make fractal picture bigger and then show it as png picture.
 
-Javascript uses JQuery framework.
+Javascript uses JQuery library.
 
 
 
