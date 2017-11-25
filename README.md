@@ -1,5 +1,5 @@
 # Fractals
-### Web Aplication that alows you to change shape and color of fractal with given inputs and HSV circle.
+### Web Aplication that allows you to change shape and color of fractal with given inputs and HSV circle.
 
 ## How does it work:
 Main element, that we are manipulating with, is canvas from HTML5.
