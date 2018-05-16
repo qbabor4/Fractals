@@ -3,15 +3,15 @@
 
 ## How does it work:
 Main element, that we are manipulating with, is canvas from HTML5.
-It allows us to set data of pixel in an array, and then show it in our canvas.
+It allows us to set data of pixel in an array, and then show it on our canvas.
 
 On HSV circle we can pick color for outside or inside of fractal. See code [here](https://github.com/qbabor4/HSV-circle-js)
 
-When we are clicking on fractal, that is shown on canvas, we can zoom it, move it or unzoom it ressing SHIFT or CTRL keys.
+When we are clicking on fractal, that is shown on canvas, we can zoom it, move it or unzoom it pressing SHIFT or CTRL keys.
 
-Program uses threads when they are available in browser. That makes calculation faster and makes page responsive while calculating new fractal (No freazes).
+Program uses threads when they are available in the browser. That makes calculation faster and makes page responsive while calculating new fractal (No freazes).
 
-You can change Mandelbrot or Julia fractal. 
+You can change Mandelbrot or Julia fractals. 
 
 You can change resolution, to make fractal picture bigger and then show it as png picture.
 
